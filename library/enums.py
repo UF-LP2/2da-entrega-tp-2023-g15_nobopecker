@@ -46,3 +46,11 @@ class eSintomas_Enfermedades(Enum):
     dolor_inespecifico_leve=35
     esguince=36
     no_urgencia=37
+
+class eColor(Enum):
+    rojo=0
+    naranja=1
+    amarillo=2
+    verde=3
+    azul=4
+    indefinido=5
