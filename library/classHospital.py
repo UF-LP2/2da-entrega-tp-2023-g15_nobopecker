@@ -1,4 +1,4 @@
-from library import classEnfermero
+from classEnfermero import cEnfermero
 class cHospital:
 
     def __init__(self, consultorios, pacientes, enfermeros):
