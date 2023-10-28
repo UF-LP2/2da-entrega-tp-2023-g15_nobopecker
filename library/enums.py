@@ -4,8 +4,7 @@ class eEstado(Enum):
     enfermo=1
     muerto=2
 
-class eSintomas_Enfermedades(Enum):
-    #sintomas
+class eSintomas(Enum):
     ambulancia=0
     inconsciente=1
     respiracion_irregular=2
@@ -29,23 +28,24 @@ class eSintomas_Enfermedades(Enum):
     picazon=20
     hemorragia=21
     fiebre=22
-    #enfermedades
-    politraumatismo_grave=23
-    coma=24
-    convulsiones=25
-    hemorragia_digestiva=26
-    isquemia=27
-    cefalea_brusca=28
-    paresia=29
-    hipertension_arterial=30
-    vertigo=31
-    sincope=32
-    #urgencia_psiquiatrica=19
-    otalgia=33
-    odontalgia=34
-    dolor_inespecifico_leve=35
-    esguince=36
-    no_urgencia=37
+
+class eEnfermedad(Enum):
+    politraumatismo_grave=0
+    coma=1
+    convulsiones=2
+    hemorragia_digestiva=3
+    isquemia=4
+    cefalea_brusca=5
+    paresia=6
+    hipertension_arterial=7
+    vertigo=8
+    sincope=9
+    urgencia_psiquiatrica=10
+    otalgia=11
+    odontalgia=12
+    dolor_inespecifico_leve=13
+    esguince=14
+    no_urgencia=15
 
 class eColor(Enum):
     rojo=0

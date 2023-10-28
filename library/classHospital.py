@@ -1,7 +1,9 @@
 from classEnfermero import cEnfermero
+from classPaciente import cPaciente
+from classConsultorio import cConsultorio
 class cHospital:
 
-    def __init__(self, consultorios, pacientes, enfermeros):
+    def __init__(self, consultorios: cConsultorio[], pacientes: cPaciente[], enfermeros):
         self.consultorios=consultorios
         self.pacientes=pacientes
         self.enfermeros=enfermeros
@@ -18,4 +20,5 @@ class cHospital:
 #	consultorio[x].medico.curar(paciente) //curamos al paciente en el consultorio determinado
 # }
 
-#def atender_urgencia(paciente: cPaciente)
+def atender_urgencia(paciente: cPaciente) ->None:
+    for x in range
