@@ -54,3 +54,15 @@ class eColor(Enum):
     verde=3
     azul=4
     indefinido=5
+
+class eFactor_Riesgo(Enum): #el nro de la derecha es un entero que se sumará a la prioridad de la enfermedad del paciente
+    #condiciones
+    embarazo=6
+    mayor_edad=3
+    #complicaciones o enfermedades preexistentes
+    obesidad=2
+    diabetes=1
+    enf_cardiovasculares=5
+    enf_respiratorias=4
+    #no tiene factores de riesgo adicionales a su enfermedad
+    ninguno=0
