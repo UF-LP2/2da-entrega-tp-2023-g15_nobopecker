@@ -29,8 +29,8 @@ def arbol_sintomas():
     sincope = Node(165)
     ambulancia = Node(200)
     politraumatismo_grave = Node(190)
-    urgencia_psiquiatrica_s = Node(220)
-    urgencia_psiquiatrica_e = Node(210)
+    delirio = Node(220)
+    urgencia_psiquiatrica = Node(210)
     no_urgencia = Node(230)
 
     #arbol
@@ -63,9 +63,9 @@ def arbol_sintomas():
 
     aturdimiento.right=ambulancia
     ambulancia.left=politraumatismo_grave
-    ambulancia.right=urgencia_psiquiatrica_s
-    urgencia_psiquiatrica_s.left=urgencia_psiquiatrica_e
-    urgencia_psiquiatrica_s.right=no_urgencia
+    ambulancia.right=delirio
+    delirio.left=urgencia_psiquiatrica
+    delirio.right=no_urgencia
 
     print (respiracion_irregular)
 
