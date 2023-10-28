@@ -1,4 +1,4 @@
-
+from library import classConsultorio
 class cEnfermero:
 
     def __init__(self, ID, turno, arbol_sintomas):

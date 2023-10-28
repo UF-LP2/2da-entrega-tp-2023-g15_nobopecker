@@ -1,3 +1,4 @@
+from library import classEnfermero
 class cHospital:
 
     def __init__(self, consultorios, pacientes, enfermeros):
