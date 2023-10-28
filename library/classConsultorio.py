@@ -1,5 +1,5 @@
 class cConsultorio:
 
-    def __init__(self, ocupado = False, numero):
+    def __init__(self, numero ,ocupado = False):
         self.ocupado=ocupado
         self.numero=numero
