@@ -142,3 +142,29 @@ class cEnfermero:
             return arbol_sintomas
         else:
             return cEnfermero.comparar_sintomas(sintomas, arbol_sintomas.left) if arbol_sintomas.value in sintomas else cEnfermero.comparar_sintomas(sintomas, arbol_sintomas.right)
+
+    @staticmethod
+    def elegir_paciente_optimo(lista:list[cPaciente])->cPaciente:
+        if len(lista)==1:
+            return lista
+        elif len(lista)==2:
+            aux1=(lista[0].diagnostico.prioridad + lista[0].factor_riesgo)/lista[0].diagnostico.duracion
+            aux2 = (lista[1].diagnostico.prioridad + lista[1].factor_riesgo) / lista[1].diagnostico.duracion
+
+            return lista[0] if aux1>aux2 else lista[1]
+        else:
+            optimo_primera_mitad=cEnfermero.elegir_paciente_optimo(lista[:len(lista)/2])
+            optimo_seguda_mitad=cEnfermero.elegir_paciente_optimo(lista[len(lista)/2:])
+            nueva_lista:list[cPaciente]=[optimo_primera_mitad,optimo_seguda_mitad]
+            return cEnfermero.elegir_paciente_optimo(nueva_lista)
+
+
+
+
+
+
+
+
+
+
+            return
