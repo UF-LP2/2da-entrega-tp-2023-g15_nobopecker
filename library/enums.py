@@ -47,12 +47,12 @@ class eEnfermedad(Enum):
     esguince=14
     no_urgencia=15
 
-class eColor(Enum):
+class eColor(Enum):#el nro de la derecha corresponde al tiempo max de espera
     rojo=0
-    naranja=1
-    amarillo=2
-    verde=3
-    azul=4
+    naranja=10
+    amarillo=60
+    verde=120
+    azul=240
     indefinido=5
 
 class eFactor_Riesgo(Enum): #el nro de la derecha es un entero que se sumará a la prioridad de la enfermedad del paciente
