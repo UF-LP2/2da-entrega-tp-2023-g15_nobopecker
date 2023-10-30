@@ -1,5 +1,6 @@
 from enums import eEstado
 from enums import eSintomas
+from enums import eFactor_Riesgo
 from classEnfermedad import cEnfermedad
 class cPaciente:
 
