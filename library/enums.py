@@ -24,7 +24,7 @@ class eSintomas(Enum):
     vision_borrosa=16
     aturdimiento=17
     sensacion_calor=18
-    urgencia_psiquiatrico=19
+    delirio=19
     picazon=20
     hemorragia=21
     fiebre=22

@@ -1,24 +1,54 @@
 from binarytree import Node
-from enums import eSintomas
-from enums import eEnfermedad
-def arbol_sintomas():
-    eSintomas.respiracion_irregular=Node
 
+def arbol_sintomas():
+
+    #inicializo nodos
+    respiracion_irregular=Node(100)
+    pulsaciones_agitadas= Node(30)
+    dolor= Node(150)
+    nauseas= Node(15)
+    inconsciente= Node(50)
+    isquemia= Node(10)
+    convulsiones =Node(200)
+    coma = Node(40)
+    hemorragia_digestiva = Node(60)
+    mareo_desmayo = Node(120)
+    vision_borrosa = Node(110)
+    hipertension_arterial = Node(105)
+    vertigo = Node(115)
+    hinchazon = Node(140)
+    lagrimeo = Node(130)
+    cefalea_brusca = Node(125)
+    esguince = Node(135)
+    hemorragia = Node(145)
+    odontalgia = Node(142)
+    dolor_inespecifico_leve = Node(148)
+    aturdimiento= Node(180)
+    picazon = Node(160)
+    otalgia = Node(155)
+    sincope = Node(165)
+    ambulancia = Node(200)
+    politraumatismo_grave = Node(190)
+    delirio = Node(220)
+    urgencia_psiquiatrica = Node(210)
+    no_urgencia = Node(230)
+
+    #arbol
     respiracion_irregular.left=pulsaciones_agitadas
     pulsaciones_agitadas.left=nauseas
     nauseas.left=isquemia
-    nauseas.right=convoluciones
-    pulsaciones_agitadas.right=inconsiente
+    nauseas.right=convulsiones
+    pulsaciones_agitadas.right=inconsciente
     inconsciente.left=coma
     inconsciente.right=hemorragia_digestiva
 
-    respitacion_irregular.right=dolor
+    respiracion_irregular.right=dolor
     dolor.left=mareo_desmayo
     mareo_desmayo.left=pulsaciones_agitadas
-    pulsaciones_agitadas.left=hipertension_arterial
-    pulsaciones_agitadas.right=vertigo
+    vision_borrosa.left=hipertension_arterial
+    vision_borrosa.right=vertigo
 
-    mareo_demsayo.right=hinchazon
+    mareo_desmayo.right=hinchazon
     hinchazon.left=lagrimeo
     lagrimeo.left=cefalea_brusca
     lagrimeo.right=esguince
@@ -27,14 +57,19 @@ def arbol_sintomas():
     hemorragia.right=dolor_inespecifico_leve
 
     dolor.right=aturdimiento
-    atrurdimiento.left=picazon
+    aturdimiento.left=picazon
     picazon.left=otalgia
     picazon.right=sincope
 
     aturdimiento.right=ambulancia
     ambulancia.left=politraumatismo_grave
-    ambulancia.right=urgencia_psiquiatrica
-    urgencia_psiquiatrica.left=urgencia_psiquiatrica
-    urgencia_psiquiatrica.right=no_urgencia
+    ambulancia.right=delirio
+    delirio.left=urgencia_psiquiatrica
+    delirio.right=no_urgencia
+
+    print (respiracion_irregular)
+
+if __name__ == "__main__":
+    arbol_sintomas()
 
 
