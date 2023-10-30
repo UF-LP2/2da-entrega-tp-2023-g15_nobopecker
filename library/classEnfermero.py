@@ -1,7 +1,9 @@
 from classPaciente import  cPaciente
 from classConsultorio import cConsultorio
+from classEnfermedad import cEnfermedad
 from enums import eSintomas
 from enums import eEnfermedad
+from enums import eColor
 from binarytree import Node
 class cEnfermero:
     #arbol_sintomas =
@@ -129,11 +131,7 @@ class cEnfermero:
             aux.tiempo_restante =int(eColor.azul)
             aux.duracion = 5
 
-
-
-
-
-        return enfermedad
+        return aux
 
     def comparar_sintomas(sintomas)->Node:
         if arbol_sintomas.right==null and arbol_sintomas.left==null: #hoja

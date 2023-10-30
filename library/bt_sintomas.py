@@ -67,8 +67,6 @@ def arbol_sintomas():
     delirio.left=urgencia_psiquiatrica
     delirio.right=no_urgencia
 
-    print (respiracion_irregular)
-
 if __name__ == "__main__":
     arbol_sintomas()
 
