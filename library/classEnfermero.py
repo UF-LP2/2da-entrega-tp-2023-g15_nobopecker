@@ -1,21 +1,24 @@
 from classPaciente import  cPaciente
-from classConsultorio import cConsultorio
 from classEnfermedad import cEnfermedad
 from enums import eSintomas
 from enums import eEnfermedad
 from enums import eColor
 from binarytree import Node
+from bt_sintomas import arbol_sintomas
+
 class cEnfermero:
-    #arbol_sintomas =
+
     def __init__(self, ID, turno):
         self.ID=ID
         self.turno=turno
 
+    @staticmethod
     def diagnosticar(paciente:cPaciente)-> cEnfermedad:
-       return definir_enfermedad(paciente.sintomas)
+       return cEnfermero.definir_enfermedad(paciente.sintomas)
 
+    @staticmethod
     def definir_enfermedad(sintomas:eSintomas)->cEnfermedad:
-        nodo_enfermedad= comparar_sintomas(sintomas)
+        nodo_enfermedad= cEnfermero.comparar_sintomas(sintomas, arbol_sintomas())
         nombre_enfermedad=nodo_enfermedad.value
         #inicializo una enfermedad cualquiera y despues tapo los datos con lo que me devuelve el arbol
         aux=cEnfermedad(eColor.indefinido, 0, eEnfermedad.no_urgencia, 0,0)
@@ -133,96 +136,9 @@ class cEnfermero:
 
         return aux
 
-    def comparar_sintomas(sintomas)->Node:
-        if arbol_sintomas.right==null and arbol_sintomas.left==null: #hoja
+    @staticmethod
+    def comparar_sintomas(sintomas, arbol_sintomas)->Node:
+        if arbol_sintomas.right==None and arbol_sintomas.left==None: #hoja
             return arbol_sintomas
         else:
-            return comparar_sintomas(sintomas, arbol_sintomas.left) if arbol_sintomas.value in sintomas else comparar_sintomas(sintomas, arbol_sintomas.right)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                .
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            return cEnfermero.comparar_sintomas(sintomas, arbol_sintomas.left) if arbol_sintomas.value in sintomas else cEnfermero.comparar_sintomas(sintomas, arbol_sintomas.right)

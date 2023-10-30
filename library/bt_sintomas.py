@@ -1,6 +1,6 @@
 from binarytree import Node
 
-def arbol_sintomas():
+def arbol_sintomas() -> Node:
 
     #inicializo nodos
     respiracion_irregular=Node(100)
@@ -67,7 +67,7 @@ def arbol_sintomas():
     delirio.left=urgencia_psiquiatrica
     delirio.right=no_urgencia
 
-if __name__ == "__main__":
-    arbol_sintomas()
+    return respiracion_irregular
+
 
 
