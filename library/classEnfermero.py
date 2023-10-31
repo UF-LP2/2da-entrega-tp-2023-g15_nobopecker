@@ -12,13 +12,11 @@ class cEnfermero:
         self.ID=ID
         self.turno=turno
 
-    @staticmethod
-    def diagnosticar(paciente:cPaciente)-> cEnfermedad:
-       return cEnfermero.definir_enfermedad(paciente.sintomas)
+    def diagnosticar(self, paciente:cPaciente)-> cEnfermedad:
+       return cEnfermero.definir_enfermedad(self, paciente.sintomas)
 
-    @staticmethod
-    def definir_enfermedad(sintomas:eSintomas)->cEnfermedad:
-        nodo_enfermedad= cEnfermero.comparar_sintomas(sintomas, arbol_sintomas())
+    def definir_enfermedad(self, sintomas:eSintomas)->cEnfermedad:
+        nodo_enfermedad= cEnfermero.comparar_sintomas(self, sintomas, arbol_sintomas())
         nombre_enfermedad=nodo_enfermedad.value
         #inicializo una enfermedad cualquiera y despues tapo los datos con lo que me devuelve el arbol
         aux=cEnfermedad(eColor.indefinido, 0, eEnfermedad.no_urgencia, 0,0)
@@ -135,36 +133,23 @@ class cEnfermero:
             aux.duracion = 5
 
         return aux
-
-    @staticmethod
-    def comparar_sintomas(sintomas, arbol_sintomas)->Node:
+    def comparar_sintomas(self, sintomas, arbol_sintomas)->Node:
         if arbol_sintomas.right==None and arbol_sintomas.left==None: #hoja
             return arbol_sintomas
         else:
-            return cEnfermero.comparar_sintomas(sintomas, arbol_sintomas.left) if arbol_sintomas.value in sintomas else cEnfermero.comparar_sintomas(sintomas, arbol_sintomas.right)
+            return cEnfermero.comparar_sintomas(self, sintomas, arbol_sintomas.left) if arbol_sintomas.value in sintomas else cEnfermero.comparar_sintomas(self, sintomas, arbol_sintomas.right)
 
-    @staticmethod
-    def elegir_paciente_optimo(lista:list[cPaciente])->cPaciente:
+    def elegir_paciente_optimo(self, lista:list[cPaciente])-> cPaciente:
         if len(lista)==1:
-            return lista
+            return lista[0]
         elif len(lista)==2:
             aux1=(lista[0].diagnostico.prioridad + lista[0].factor_riesgo)/lista[0].diagnostico.duracion
             aux2 = (lista[1].diagnostico.prioridad + lista[1].factor_riesgo) / lista[1].diagnostico.duracion
 
             return lista[0] if aux1>aux2 else lista[1]
         else:
-            optimo_primera_mitad=cEnfermero.elegir_paciente_optimo(lista[:len(lista)/2])
-            optimo_seguda_mitad=cEnfermero.elegir_paciente_optimo(lista[len(lista)/2:])
+            optimo_primera_mitad=cEnfermero.elegir_paciente_optimo(self, lista[:len(lista)/2])
+            optimo_seguda_mitad=cEnfermero.elegir_paciente_optimo(self, lista[len(lista)/2:])
             nueva_lista:list[cPaciente]=[optimo_primera_mitad,optimo_seguda_mitad]
-            return cEnfermero.elegir_paciente_optimo(nueva_lista)
+            return cEnfermero.elegir_paciente_optimo(self, nueva_lista)
 
-
-
-
-
-
-
-
-
-
-            return
