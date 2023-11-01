@@ -24,7 +24,3 @@ def leerEnfermero() -> list[cEnfermero]: #para mi es al pedo, el ID lo puedo gen
             enfermero_aux=cEnfermero(row[0])
             enfermeros.append(enfermero_aux)
     return enfermeros
-
-if __name__ == "__main__":
-    pacientitos=leerPaciente()
-    print(pacientitos[13].sintomas[0])
