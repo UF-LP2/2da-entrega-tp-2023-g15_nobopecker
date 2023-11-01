@@ -1,10 +1,7 @@
-from enums import eEstado
-from enums import eSintomas
-from enums import eFactor_Riesgo
 from classEnfermedad import cEnfermedad
 class cPaciente:
 
-    def __init__(self, ID, sintomas:eSintomas, diagnostico:cEnfermedad, estado=eEstado.enfermo, factor_riesgo= eFactor_Riesgo):
+    def __init__(self, ID, diagnostico:cEnfermedad, factor_riesgo: str, sintomas:list[str], estado="enfermo"):
         self.ID=ID
         self.sintomas=sintomas
         self.diagnostico=diagnostico

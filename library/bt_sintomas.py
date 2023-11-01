@@ -27,10 +27,10 @@ def arbol_sintomas() -> Node:
     picazon = Node(160)
     otalgia = Node(155)
     sincope = Node(165)
-    ambulancia = Node(200)
+    riesgo_vital = Node(200)
     politraumatismo_grave = Node(190)
-    delirio = Node(220)
-    urgencia_psiquiatrica = Node(210)
+    urgencia_psiquiatrica_s = Node(220)
+    urgencia_psiquiatrica_e = Node(210)
     no_urgencia = Node(230)
 
     #arbol
@@ -61,11 +61,11 @@ def arbol_sintomas() -> Node:
     picazon.left=otalgia
     picazon.right=sincope
 
-    aturdimiento.right=ambulancia
-    ambulancia.left=politraumatismo_grave
-    ambulancia.right=delirio
-    delirio.left=urgencia_psiquiatrica
-    delirio.right=no_urgencia
+    aturdimiento.right=riesgo_vital
+    riesgo_vital.left=politraumatismo_grave
+    riesgo_vital.right=urgencia_psiquiatrica_s
+    urgencia_psiquiatrica_s.left=urgencia_psiquiatrica_e
+    urgencia_psiquiatrica_s.right=no_urgencia
 
     return respiracion_irregular
 
