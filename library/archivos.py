@@ -10,9 +10,8 @@ def leerPaciente() -> list[cPaciente]:
         reader=csv.reader(file)
         next(file)
         for row in reader:
-            #hay q hacer la conversion de factor de riesgo a str y viceversa, lo mismo para sintomas
-            #a los sintomas los pongo en la misma columna separados por guiones y desp uso split -
-            paciente_aux=cPaciente(row[0],dummy,row[1],row[2],"enfermo")
+            lista_sintomas=row[2].split()
+            paciente_aux=cPaciente(row[0],dummy,row[1],lista_sintomas,"enfermo")
             pacientes.append(paciente_aux)
     return pacientes
 
