@@ -23,6 +23,7 @@ def test_atender_urgencia():
     assert paciente_aux.estado=="sano"
 
 def test_atender_DC():
+    #test 1
     consultorio=cConsultorio(1,None,False)
     enfermero= cEnfermero(3,"Emi")
     paciente1=cPaciente(6,"Agos","esguince","embarazo", "")#los sintomas no me importan
