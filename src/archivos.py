@@ -10,7 +10,7 @@ def leerPaciente() -> list[cPaciente]:
         reader=csv.reader(file)
         next(file)
         for row in reader:
-            lista_sintomas=row[2].split()
+            lista_sintomas=row[3].split()
             paciente_aux=cPaciente(row[0],row[1],dummy,row[2],lista_sintomas,"enfermo")
             pacientes.append(paciente_aux)
     return pacientes
