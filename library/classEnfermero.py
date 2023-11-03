@@ -30,7 +30,7 @@ class cEnfermero:
 
     def definir_enfermedad(self, sintomas:list[str])->cEnfermedad:
         nodo_enfermedad= cEnfermero.comparar_sintomas(self, sintomas, arbol_sintomas())
-        nombre_enfermedad=nodo_enfermedad.value
+        nombre_enfermedad=nodo_enfermedad.name
         #inicializo una enfermedad cualquiera y despues tapo los datos con lo que me devuelve el arbol
         aux=cEnfermedad("indefinido", 0, "indefinido", 0,0)
         if nombre_enfermedad=="politraumatismo_grave":
@@ -150,7 +150,7 @@ class cEnfermero:
         if arbol_sintomas.right==None and arbol_sintomas.left==None: #hoja
             return arbol_sintomas
         else:
-            return cEnfermero.comparar_sintomas(self, sintomas, arbol_sintomas.left) if arbol_sintomas.value in sintomas else cEnfermero.comparar_sintomas(self, sintomas, arbol_sintomas.right)
+            return cEnfermero.comparar_sintomas(self, sintomas, arbol_sintomas.left) if arbol_sintomas.name in sintomas else cEnfermero.comparar_sintomas(self, sintomas, arbol_sintomas.right)
 
     def elegir_paciente_optimo(self, lista:list[cPaciente])-> cPaciente:
         if len(lista)==1:
