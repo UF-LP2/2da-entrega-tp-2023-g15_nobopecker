@@ -1,31 +1,31 @@
-ID,factor_riesgo,sintomas
-150,obesidad,aturdimiento picazon
-3514,diabetes,dolor mareo_desmayo palidez
-1019,ninguno,enrojecimiento_ocular lagrimeo congestion_nasal hinchazon_facial dolor
-6192,enf_respiratoria,dolor
-9274,ninguno,enrojecimiento_ocular lagrimeo congestion_nasal hinchazon_facial dolor
-7186,ninguno,dolor hinchazon
-1479,embarazo,palidez aturdimiento vision_borrosa nauseas sudoracion sensacion_de_calor
-9238,enf_cardiovascular,dolor mareo_desmayo palidez
-6919,nenf_respiratoria,palidez aturdimiento vision_borrosa nauseas sudoracion sensacion_de_calor
-4918,ninguno,inconsciente respiracion_irregular
-9195,ninguno,dolor hemorragia fiebre
-3931,ninguno,dolor hinchazon
-3481,ninguno,dolor hemorragia fiebre
-8705,enf_respiratoria,urgencia_psiquiatrica_s
-1733,ninguno,perdida_control_muscular
-4994,enf_cardiovascular,dolor pulsaciones_agitadas respiracion_irregular nauseas sudoracion cansancio
-6593,diabetes,aturdimiento picazon
-9479,embarazo,inconsciente respiracion_irregular babea pulsaciones_agitadas
-3338,enf_respiratoria,dolor mareo_desmayo nauseas vision_borrosa aturdimiento pulsaciones_agitadas
-3416,mayor_edad,dolor pulsaciones_agitadas respiracion_irregular nauseas sudoracion cansancio
-4231,mayor_edad,dolor pulsaciones_agitadas respiracion_irregular nauseas sudoracion cansancio
-2940,embarazo,respiracion_irregular nauseas dolor mareo_desmayo cansancio palidez
-1169,obesidad,ninguno
-1816,ninguno,dolor hemorragia fiebre
-8348,ninguno,riesgo_vital
-6515,mayor_edad,palidez aturdimiento vision_borrosa nauseas sudoracion sensacion_de_calor
-5354,ninguno,dolor mareo_desmayo palidez
-7756,ninguno,dolor pulsaciones_agitadas respiracion_irregular nauseas sudoracion cansancio
-880,ninguno,riesgo_vital
-3232,diabetes,dolor mareo_desmayo palidez
+ID,nombre_apellido,factor_riesgo,sintomas
+8306,Berk Torrisi,obesidad,aturdimiento picazon
+2508,Cesar Crossley,diabetes,dolor mareo_desmayo palidez
+7580,Vaughan De Francesco,ninguno,enrojecimiento_ocular lagrimeo congestion_nasal hinchazon_facial dolor
+1985,Penny McManamon,enf_respiratoria,dolor
+9411,Sofia Rizzillo,ninguno,enrojecimiento_ocular lagrimeo congestion_nasal hinchazon_facial dolor
+4128,Gianina Rentenbeck,ninguno,dolor hinchazon
+2094,Lucy Phayre,embarazo,palidez aturdimiento vision_borrosa nauseas sudoracion sensacion_de_calor
+6380,Standford Goudman,enf_cardiovascular,dolor mareo_desmayo palidez
+3099,Roslyn Kinman,nenf_respiratoria,palidez aturdimiento vision_borrosa nauseas sudoracion sensacion_de_calor
+3481,Cele Roswarn,ninguno,inconsciente respiracion_irregular
+4863,Burr Ferrelli,ninguno,dolor hemorragia fiebre
+6759,Mellie Pelling,ninguno,dolor hinchazon
+7794,Willie Beacham,ninguno,dolor hemorragia fiebre
+9219,Brigit Gillbee,enf_respiratoria,urgencia_psiquiatrica_s
+3155,Rochester Marriott,ninguno,perdida_control_muscular
+5851,Erna Mateiko,enf_cardiovascular,dolor pulsaciones_agitadas respiracion_irregular nauseas sudoracion cansancio
+9367,Piotr Tunnow,diabetes,aturdimiento picazon
+3306,Susan Sidle,embarazo,inconsciente respiracion_irregular babea pulsaciones_agitadas
+3596,Keely Dudbridge,enf_respiratoria,dolor mareo_desmayo nauseas vision_borrosa aturdimiento pulsaciones_agitadas
+8521,Sybyl Edmundson,mayor_edad,dolor pulsaciones_agitadas respiracion_irregular nauseas sudoracion cansancio
+9538,Delcina Jorio,mayor_edad,dolor pulsaciones_agitadas respiracion_irregular nauseas sudoracion cansancio
+6011,Alison Bramsen,embarazo,respiracion_irregular nauseas dolor mareo_desmayo cansancio palidez
+7228,Elsworth Zisneros,obesidad,ninguno
+4306,Norry Donaway,ninguno,dolor hemorragia fiebre
+8760,Merrily Bain,ninguno,riesgo_vital
+6554,Darlene Syversen,mayor_edad,palidez aturdimiento vision_borrosa nauseas sudoracion sensacion_de_calor
+6784,Emmanuel Tome,ninguno,dolor mareo_desmayo palidez
+4659,ChickieTissell,ninguno,dolor pulsaciones_agitadas respiracion_irregular nauseas sudoracion cansancio
+1796,Frazer Feltham,ninguno,riesgo_vital
+5730,Alla Stetson,diabetes,dolor mareo_desmayo palidez
