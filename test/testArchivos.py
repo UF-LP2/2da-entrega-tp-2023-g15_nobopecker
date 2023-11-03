@@ -1,7 +1,5 @@
 from src.archivos import leerPaciente
-from src.archivos import leerEnfermero
-from src.classPaciente import cPaciente
-from src.classEnfermero import cEnfermero
+from library.classPaciente import cPaciente
 from unittest import TestCase
 
 class TestLeerPaciente(TestCase):

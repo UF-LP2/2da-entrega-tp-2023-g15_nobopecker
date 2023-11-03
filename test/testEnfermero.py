@@ -1,13 +1,7 @@
-from unittest import TestCase
-from src.classEnfermero import cEnfermero
-from src.bt_sintomas import arbol_sintomas
+from library.classEnfermero import cEnfermero
+from library.bt_sintomas import arbol_sintomas
 
-
-class test_cEnfermero(TestCase):
-    def test_always_passes(self):
-        self.assertTrue(True)
-
-    def test_comprarsintomas(self):
-        enfermero=cEnfermero(1,"Pepe")
-        enfermedad=enfermero.comparar_sintomas("riesgo_vital", arbol_sintomas()).value
-        self.assertEquals(enfermedad,"politraumatismo_grave")
+def testcomprarsintomas(self):
+    enfermero=cEnfermero(1,"Pepe")
+    enfermedad=enfermero.comparar_sintomas("riesgo_vital", arbol_sintomas()).value
+    assert enfermedad =="politraumatismo_grave"

@@ -1,4 +1,4 @@
-from src.classEnfermedad import cEnfermedad
+from library.classEnfermedad import cEnfermedad
 class cPaciente:
 
     def __init__(self, ID, nombre_apellido:str, diagnostico:cEnfermedad, factor_riesgo: str, sintomas:list[str], estado="enfermo"):

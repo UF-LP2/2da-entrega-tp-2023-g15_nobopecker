@@ -1,7 +1,7 @@
 import csv
-from src.classPaciente import cPaciente
-from src.classEnfermero import cEnfermero
-from src.classEnfermedad import cEnfermedad
+from library.classPaciente import cPaciente
+from library.classEnfermero import cEnfermero
+from library.classEnfermedad import cEnfermedad
 
 def leerPaciente() -> list[cPaciente]:
     pacientes: list[cPaciente]=[]
