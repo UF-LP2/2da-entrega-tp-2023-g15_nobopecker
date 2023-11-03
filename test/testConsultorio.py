@@ -10,4 +10,3 @@ def test_curar():
     consultorio_aux=cConsultorio(2,paciente_aux,False)
     consultorio_aux.curar(paciente_aux)
     assert paciente_aux.estado=="sano"
-
