@@ -1,6 +1,6 @@
 import time
 from src.classPaciente import cPaciente
-from classEnfermero import cEnfermero
+from src.classEnfermero import cEnfermero
 class cConsultorio:
 
     def __init__(self, numero:int, paciente_actual: cPaciente ,ocupado = False):
