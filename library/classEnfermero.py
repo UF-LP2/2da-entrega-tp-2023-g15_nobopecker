@@ -21,8 +21,9 @@ class cEnfermero:
     enf_respiratoria=4
     ninguno=0
 
-    def __init__(self,ID):
+    def __init__(self,ID, nombre_apellido:str):
         self.ID=ID
+        self.nombre_apellido=nombre_apellido
 
     def diagnosticar(self, paciente:cPaciente)-> cEnfermedad:
        return cEnfermero.definir_enfermedad(self, paciente.sintomas)

@@ -11,7 +11,7 @@ def leerPaciente() -> list[cPaciente]:
         next(file)
         for row in reader:
             lista_sintomas=row[2].split()
-            paciente_aux=cPaciente(row[0],dummy,row[1],lista_sintomas,"enfermo")
+            paciente_aux=cPaciente(row[0],row[1],dummy,row[2],lista_sintomas,"enfermo")
             pacientes.append(paciente_aux)
     return pacientes
 
@@ -21,6 +21,6 @@ def leerEnfermero() -> list[cEnfermero]: #para mi es al pedo, el ID lo puedo gen
         reader=csv.reader(file)
         next(file)
         for row in reader:
-            enfermero_aux=cEnfermero(row[0])
+            enfermero_aux=cEnfermero(row[0], row[1])
             enfermeros.append(enfermero_aux)
     return enfermeros
