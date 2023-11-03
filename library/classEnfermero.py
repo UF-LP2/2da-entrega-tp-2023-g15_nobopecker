@@ -13,13 +13,13 @@ class cEnfermero:
     tmax_verde=120
     tmax_azul=240
     #factor de riesgo
-    embarazo=6
-    mayor_edad=3
+    ninguno = 0
+    diabetes = 1
     obesidad=2
-    diabetes=1
-    enf_cardiovascular=5
-    enf_respiratoria=4
-    ninguno=0
+    mayor_edad = 3
+    enf_respiratoria = 4
+    enf_cardiovascular = 5
+    embarazo=6
 
     def __init__(self,ID, nombre_apellido:str):
         self.ID=ID
