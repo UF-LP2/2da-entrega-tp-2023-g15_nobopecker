@@ -24,12 +24,16 @@ def test_atender_urgencia():
 
 def test_atender_DC():
     #test 1
+    enfermedad1=cEnfermedad("verde",45,"esguince",5,cEnfermero.tmax_verde)
+    enfermedad2=cEnfermedad("rojo",5,"politraumatismo_grave",100,0)
+    enfermedad3=cEnfermedad("naranja",20,"isquemia",10,cEnfermero.tmax_naraja)
+    enfermedad4=cEnfermedad("azul",5,"no_urgencia",2,cEnfermero.tmax_azul)
     consultorio=cConsultorio(1,None,False)
     enfermero= cEnfermero(3,"Emi")
-    paciente1=cPaciente(6,"Agos","esguince","embarazo", "")#los sintomas no me importan
-    paciente2=cPaciente(7,"Pau", "politraumatismo_grave", "ninguno","riesgo_vital")#en teoria no deberia llegar a estar pero como le pusimos una prioridad muy alta lo deberia atender
-    paciente3=cPaciente(8,"Lupe","isquemia","obesidad","")
-    paciente4=cPaciente(9,"Valen","no_urgencia","mayor_edad","")
+    paciente1=cPaciente(6,"Agos",enfermedad1,"embarazo", "")#los sintomas no me importan para este test
+    paciente2=cPaciente(7,"Pau", enfermedad2, "ninguno","riesgo_vital")#en teoria no deberia llegar a estar pero como le pusimos una prioridad muy alta lo deberia atender
+    paciente3=cPaciente(8,"Lupe",enfermedad3,"obesidad","")
+    paciente4=cPaciente(9,"Valen",enfermedad4,"mayor_edad","")
 
     lista=list[paciente1,paciente2, paciente3, paciente4]
 
