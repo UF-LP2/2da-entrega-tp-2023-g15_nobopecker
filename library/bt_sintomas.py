@@ -1,7 +1,7 @@
+import binarytree
 from library.classNodos import Nodo
-from binarytree import Node
 
-def arbol_sintomas() -> Nodo:
+def arbol_sintomas() -> binarytree:
 
     #inicializo nodos
     respiracion_irregular=Nodo(100,"respiracion_irregular")
@@ -69,6 +69,10 @@ def arbol_sintomas() -> Nodo:
     urgencia_psiquiatrica_s.right=no_urgencia
 
     return respiracion_irregular
+
+if __name__ == "__main__":
+    rama_izq=arbol_sintomas().left
+    print(rama_izq.name)
 
 
 

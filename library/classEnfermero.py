@@ -1,6 +1,6 @@
 from library.classPaciente import cPaciente
 from library.classEnfermedad import cEnfermedad
-from binarytree import Node
+from library.classNodos import Nodo
 from library.bt_sintomas import arbol_sintomas
 
 class cEnfermero:
@@ -146,7 +146,7 @@ class cEnfermero:
             aux.duracion = 5
 
         return aux
-    def comparar_sintomas(self, sintomas: list[str], arbol_sintomas)->Node:
+    def comparar_sintomas(self, sintomas: list[str], arbol_sintomas)->Nodo:
         if arbol_sintomas.right==None and arbol_sintomas.left==None: #hoja
             return arbol_sintomas
         else:
@@ -156,8 +156,8 @@ class cEnfermero:
         if len(lista)==1:
             return lista[0]
         elif len(lista)==2:
-            factor_riesgo1=cEnfermero.convert_fr(self,lista[0].factor_riesgo)
-            factor_riesgo2 = cEnfermero.convert_fr(self,lista[1].factor_riesgo)
+            factor_riesgo1=cEnfermero.convert_fr(lista[0].factor_riesgo)
+            factor_riesgo2 = cEnfermero.convert_fr(lista[1].factor_riesgo)
             aux1=(lista[0].diagnostico.prioridad + factor_riesgo1)/lista[0].diagnostico.duracion
             aux2 = (lista[1].diagnostico.prioridad + factor_riesgo2) / lista[1].diagnostico.duracion
 
@@ -168,7 +168,8 @@ class cEnfermero:
             nueva_lista:list[cPaciente]=[optimo_primera_mitad,optimo_seguda_mitad]
             return cEnfermero.elegir_paciente_optimo(self, nueva_lista)
 
-    def convert_fr(self, factor_riesgo:str) -> int:
+    @staticmethod
+    def convert_fr(factor_riesgo:str) -> int:
         valor:int=0
         if factor_riesgo=="embarazo":
             valor=cEnfermero.embarazo
