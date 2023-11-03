@@ -1,7 +1,7 @@
 from src.classPaciente import cPaciente
-from classEnfermedad import cEnfermedad
+from src.classEnfermedad import cEnfermedad
 from binarytree import Node
-from bt_sintomas import arbol_sintomas
+from src.bt_sintomas import arbol_sintomas
 
 class cEnfermero:
 

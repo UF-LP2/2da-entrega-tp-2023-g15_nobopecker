@@ -1,6 +1,6 @@
-from classEnfermero import cEnfermero
+from src.classEnfermero import cEnfermero
 from src.classPaciente import cPaciente
-from classConsultorio import cConsultorio
+from src.classConsultorio import cConsultorio
 class cHospital:
 
     def __init__(self, consultorios: list[cConsultorio], pacientes: list[cPaciente], enfermeros: list[cEnfermero]):
