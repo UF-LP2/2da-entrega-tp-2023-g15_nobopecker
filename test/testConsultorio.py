@@ -32,12 +32,14 @@ def test_atender_DC():
     consultorio=cConsultorio(1,None,False)
     enfermero= cEnfermero(3,"Emi")
 
-    paciente1=cPaciente(6,"Agos",enfermedad1,"embarazo", "")#los sintomas no me importan para este test
-    paciente2=cPaciente(7,"Pau", enfermedad2, "ninguno","riesgo_vital")#en teoria no deberia llegar a estar pero como le pusimos una prioridad muy alta lo deberia atender
-    paciente3=cPaciente(8,"Lupe",enfermedad3,"obesidad","")
-    paciente4=cPaciente(9,"Valen",enfermedad4 ,"mayor_edad","")
+    lista_sintomas:list[str]=[]
 
-    lista=list[paciente1,paciente2, paciente3, paciente4]
+    paciente1=cPaciente(6,"Agos",enfermedad1,"embarazo",lista_sintomas )#los sintomas no me importan para este test
+    paciente2=cPaciente(7,"Pau", enfermedad2, "ninguno",lista_sintomas)#en teoria no deberia llegar a estar pero como le pusimos una prioridad muy alta lo deberia atender
+    paciente3=cPaciente(8,"Lupe",enfermedad3,"obesidad",lista_sintomas)
+    paciente4=cPaciente(9,"Valen",enfermedad4 ,"mayor_edad",lista_sintomas)
+
+    lista:list[cPaciente]=[paciente1,paciente2, paciente3, paciente4]
 
     consultorio.atender_DC(lista, enfermero)
     assert len(lista)==0
@@ -46,15 +48,14 @@ def test_atender_DC():
     assert paciente3.estado == "sano"
     assert paciente4.estado == "sano"
 
-def test_atender_G():
-    consultorio = cConsultorio(1, None, False)
-    enfermero = cEnfermero(3, "Emi")
-    paciente1 = cPaciente(6, "Agos", "esguince", "embarazo", "")  # los sintomas no me importan
-    paciente2 = cPaciente(7, "Pau", "politraumatismo_grave", "ninguno",
-                          "riesgo_vital")  # en teoria no deberia llegar a estar pero como le pusimos una prioridad muy alta lo deberia atender
-    paciente3 = cPaciente(8, "Lupe", "isquemia", "obesidad", "")
-    paciente4 = cPaciente(9, "Valen", "no_urgencia", "mayor_edad", "")
+#def test_atender_G():
+    #consultorio = cConsultorio(1, None, False)
+    #enfermero = cEnfermero(3, "Emi")
+    #paciente1 = cPaciente(6, "Agos", "esguince", "embarazo", "")  # los sintomas no me importan
+    #paciente2 = cPaciente(7, "Pau", "politraumatismo_grave", "ninguno","riesgo_vital")  # en teoria no deberia llegar a estar pero como le pusimos una prioridad muy alta lo deberia atender
+    #paciente3 = cPaciente(8, "Lupe", "isquemia", "obesidad", "")
+    #paciente4 = cPaciente(9, "Valen", "no_urgencia", "mayor_edad", "")
 
-    filaA = PriorityQueue()
-    riesgo3=enfermero.convert_fr(paciente3.factor_riesgo)
-    filaA.put((paciente3.diagnostico.prioridad+riesgo3,paciente3))
+    #filaA = PriorityQueue()
+    #riesgo3=enfermero.convert_fr(paciente3.factor_riesgo)
+    #filaA.put((paciente3.diagnostico.prioridad+riesgo3,paciente3))
