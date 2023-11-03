@@ -1,5 +1,5 @@
 from classEnfermero import cEnfermero
-from classPaciente import cPaciente
+from src.classPaciente import cPaciente
 from classConsultorio import cConsultorio
 class cHospital:
 

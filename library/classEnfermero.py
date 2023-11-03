@@ -1,4 +1,4 @@
-from classPaciente import cPaciente
+from src.classPaciente import cPaciente
 from classEnfermedad import cEnfermedad
 from binarytree import Node
 from bt_sintomas import arbol_sintomas

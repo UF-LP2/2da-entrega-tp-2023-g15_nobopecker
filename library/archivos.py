@@ -1,5 +1,5 @@
 import csv
-from classPaciente import cPaciente
+from src.classPaciente import cPaciente
 from classEnfermero import cEnfermero
 from classEnfermedad import cEnfermedad
 

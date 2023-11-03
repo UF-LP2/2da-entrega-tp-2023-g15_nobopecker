@@ -1,5 +1,5 @@
 import time
-from classPaciente import cPaciente
+from src.classPaciente import cPaciente
 from classEnfermero import cEnfermero
 class cConsultorio:
 
