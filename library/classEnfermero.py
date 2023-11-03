@@ -163,8 +163,8 @@ class cEnfermero:
 
             return lista[0] if aux1>aux2 else lista[1]
         else:
-            optimo_primera_mitad=cEnfermero.elegir_paciente_optimo(self, lista[:len(lista)/2])
-            optimo_seguda_mitad=cEnfermero.elegir_paciente_optimo(self, lista[len(lista)/2:])
+            optimo_primera_mitad=cEnfermero.elegir_paciente_optimo(self, lista[:(int)(len(lista)/2)])
+            optimo_seguda_mitad=cEnfermero.elegir_paciente_optimo(self, lista[(int)(len(lista)/2):])
             nueva_lista:list[cPaciente]=[optimo_primera_mitad,optimo_seguda_mitad]
             return cEnfermero.elegir_paciente_optimo(self, nueva_lista)
 

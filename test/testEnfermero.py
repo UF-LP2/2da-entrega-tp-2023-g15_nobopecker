@@ -63,18 +63,18 @@ def test_diagnosticar():
     assert diagnostico_aux.tiempo_restante==cEnfermero.tmax_amarillo
     assert diagnostico_aux.duracion==15
 
-def test_elegirpacienteoptimo(): #corregir
+def test_elegirpacienteoptimo():
     enfermero=cEnfermero(2,"Tobias")
     enf1=cEnfermedad("rojo",5,"politraumatismo_grave",100,cEnfermero.tmax_rojo)
     sint1: list[str] = ["riesgo_vital"]
     pac1=cPaciente(0,"Juan",enf1,"ninguno",sint1,"enfermo")
     enf2=cEnfermedad("amarillo",15,"cefalea_brusca",8,cEnfermero.tmax_amarillo)
     sint2: list[str] = ["enrojecimiento_ocular", "lagrimeo", "congestion_nasal", "hinchazon", "dolor"]
-    pac2=cPaciente(1,"Josefina",enf1,"embarazo",sint2,"enfermo")
+    pac2=cPaciente(1,"Josefina",enf2,"embarazo",sint2,"enfermo")
     enf3=cEnfermedad("verde",35,"odontalgia",4,cEnfermero.tmax_verde)
     sint3: list[str] = ["dolor", "hemorragia", "fiebre"]
-    pac3=cPaciente(2,"Ricardo",enf3,"enf_cardiovascular",sint1,"enfermo")
-    listita:list[cPaciente]
+    pac3=cPaciente(2,"Ricardo",enf3,"enf_cardiovascular",sint3,"enfermo")
+    listita:list[cPaciente]=[]
     listita.append(pac1)
     listita.append(pac2)
     listita.append(pac3)
