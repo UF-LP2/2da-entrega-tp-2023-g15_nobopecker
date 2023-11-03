@@ -32,9 +32,9 @@ def test_atender_DC():
     consultorio=cConsultorio(1,None,False)
     enfermero= cEnfermero(3,"Emi")
 
-    paciente1=cPaciente(6,"Agos",enfermedad1 ,"embarazo", "")#los sintomas no me importan para este test
-    paciente2=cPaciente(7,"Pau", enfermedad2 , "ninguno","riesgo_vital")#en teoria no deberia llegar a estar pero como le pusimos una prioridad muy alta lo deberia atender
-    paciente3=cPaciente(8,"Lupe",enfermedad3 ,"obesidad","")
+    paciente1=cPaciente(6,"Agos",enfermedad1,"embarazo", "")#los sintomas no me importan para este test
+    paciente2=cPaciente(7,"Pau", enfermedad2, "ninguno","riesgo_vital")#en teoria no deberia llegar a estar pero como le pusimos una prioridad muy alta lo deberia atender
+    paciente3=cPaciente(8,"Lupe",enfermedad3,"obesidad","")
     paciente4=cPaciente(9,"Valen",enfermedad4 ,"mayor_edad","")
 
     lista=list[paciente1,paciente2, paciente3, paciente4]
