@@ -2,7 +2,10 @@ import pytest
 from library.classEnfermero import cEnfermero
 from library.bt_sintomas import arbol_sintomas
 
-#class test_diagnosticos(pytest.TestCase):
+from binarytree import Node
 
-    #def test_comparar_sintomas(self):
-       # assert cEnfermero.comparar_sintomas(eSintomas.urgencia_psiquiatrica,arbol_sintomas()),eEnfermedad.urgencia_psiquiatrica
+class testEnfermero(pytest.TestCase):
+
+    def test_comparar_sintomas(self):
+        enfermedad=cEnfermero.comparar_sintomas("ambulancia",arbol_sintomas()).value
+        assert enfermedad,"politraumatismo_grave"
