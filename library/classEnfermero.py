@@ -188,3 +188,20 @@ class cEnfermero:
 
         return valor
 
+    def chequear(self, filaA: PriorityQueue, filaB: PriorityQueue)-> None:
+        for i in range (len(filaA)):
+            valor_fr=cEnfermero.convert_fr(filaA[i].factor_riesgo)
+            if filaA[i].diagnostico.tiempo_restante<=2:
+                cConsultorio.atender_urgencia(filaA[i])
+            elif filaA[i].diagnostico.tiempo_restante<=10: #si el tiempo restante es menor al tiempo maximo de espera naranja, cambiamos la prioridad a la minima del grupo naranja + factor de riesgo
+                filaA[i].diagnostico.prioridad= 10 + valor_fr
+
+        for i in range (len(filaB)):
+            valor_fr = cEnfermero.convert_fr(filaB[i].factor_riesgo)
+            if filaB[i].diagnostico.tiempo_restante<=60: #mismo para amarillo
+                filaB[i].diagnostico.prioridad = 6 + valor_fr
+            elif filaB[i].diagnostico.tiempo_restante<=120: #mismo para verde
+                filaB[i].diagnostico.prioridad = 3 + valor_fr
+
+
+
