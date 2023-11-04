@@ -11,7 +11,7 @@ def test_curar():
     enfermedad_aux=cEnfermedad("indefinido",0,"indefinido",0,0)
     sintomas_aux=["urgencia_psiquiatrica_s"]
     paciente_aux=cPaciente("0011","Maria Susana",enfermedad_aux,"ninguno",sintomas_aux,"enfermo")
-    consultorio_aux=cConsultorio(2,paciente_aux,False)
+    consultorio_aux=cConsultorio(2,False)
     consultorio_aux.curar(paciente_aux)
     assert paciente_aux.estado=="sano"
 
@@ -29,7 +29,7 @@ def test_atender_DC():
     enfermedad3=cEnfermedad("naranja",20,"isquemia",10,cEnfermero.tmax_naraja)
     enfermedad4=cEnfermedad("azul",5,"no_urgencia",2,cEnfermero.tmax_azul)
 
-    consultorio=cConsultorio(1,None,False)
+    consultorio=cConsultorio(1,False)
     enfermero= cEnfermero(3,"Emi")
 
     lista_sintomas:list[str]=[]
@@ -49,7 +49,7 @@ def test_atender_DC():
     assert paciente4.estado == "sano"
 
 #def test_atender_G():
-    #consultorio = cConsultorio(1, None, False)
+    #consultorio = cConsultorio(1,  False)
     #enfermero = cEnfermero(3, "Emi")
     #paciente1 = cPaciente(6, "Agos", "esguince", "embarazo", "")  # los sintomas no me importan
     #paciente2 = cPaciente(7, "Pau", "politraumatismo_grave", "ninguno","riesgo_vital")  # en teoria no deberia llegar a estar pero como le pusimos una prioridad muy alta lo deberia atender
