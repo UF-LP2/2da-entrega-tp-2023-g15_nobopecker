@@ -25,14 +25,18 @@ class cEnfermero:
         self.ID=ID
         self.nombre_apellido=nombre_apellido
 
-    def diagnosticar(self, paciente:cPaciente)-> cEnfermedad:
-       return cEnfermero.definir_enfermedad(self, paciente.sintomas)
+    def diagnosticar(self, paciente:cPaciente)->cEnfermedad:
+        enfermedad=cEnfermero.definir_enfermedad(self, paciente.sintomas)
+        valor_fr=cEnfermero.convert_fr(paciente.factor_riesgo)
+        paciente.diagnostico.prioridad=enfermedad.prioridad+valor_fr
+        return enfermedad
 
     def definir_enfermedad(self, sintomas:list[str])->cEnfermedad:
         nodo_enfermedad= cEnfermero.comparar_sintomas(self, sintomas, arbol_sintomas())
         nombre_enfermedad=nodo_enfermedad.name
         #inicializo una enfermedad cualquiera y despues tapo los datos con lo que me devuelve el arbol
         aux=cEnfermedad("indefinido", 0, "indefinido", 0,0)
+
         if nombre_enfermedad=="politraumatismo_grave":
             aux.color="rojo"
             aux.enfermedad="politraumatismo_grave"
@@ -156,10 +160,8 @@ class cEnfermero:
         if len(lista)==1:
             return lista[0]
         elif len(lista)==2:
-            factor_riesgo1=cEnfermero.convert_fr(lista[0].factor_riesgo)
-            factor_riesgo2 = cEnfermero.convert_fr(lista[1].factor_riesgo)
-            aux1=(lista[0].diagnostico.prioridad + factor_riesgo1)/lista[0].diagnostico.duracion
-            aux2 = (lista[1].diagnostico.prioridad + factor_riesgo2) / lista[1].diagnostico.duracion
+            aux1=lista[0].diagnostico.prioridad/lista[0].diagnostico.duracion
+            aux2 =lista[1].diagnostico.prioridad/lista[1].diagnostico.duracion
 
             return lista[0] if aux1>aux2 else lista[1]
         else:
