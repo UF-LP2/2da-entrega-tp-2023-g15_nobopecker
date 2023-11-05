@@ -3,8 +3,8 @@ import time
 from datetime import datetime
 from datetime import timedelta
 from random import random
-from queue import PriorityQueue
 
+from library.classPriorityQueuePaciente import PriorityQueuePaciente
 from library.classPaciente import cPaciente
 from library.classEnfermero import cEnfermero
 from library.classConsultorio import cConsultorio
@@ -26,8 +26,8 @@ def main():
   lista_ingresados:list[cPaciente]=[]
   ingreso_pac=threading.Thread(target=ingresar_pacientes(lista_pacientes,lista_ingresados))
   lista_enfermeros_activos:list[cEnfermero]=[]
-  fila_urgencia:PriorityQueue
-  fila_no_urgencia:PriorityQueue
+  fila_urgencia=PriorityQueuePaciente()
+  fila_no_urgencia=PriorityQueuePaciente()
   fin_del_dia:datetime=hora_actual+timedelta(hours=5)#para que termine el programa
 
   reloj.start()
@@ -80,7 +80,7 @@ def ingresar_pacientes(lista_pacientes_total:list[cPaciente],lista_ingresados:li
   else:
     time.sleep(6)
 
-def trabajo_enfermeros(lista_enfermeros:list[cEnfermero], lista_pacientes:list[cPaciente], fila_urgencia: PriorityQueue, fila_no_urgencia: PriorityQueue)->None:
+def trabajo_enfermeros(lista_enfermeros:list[cEnfermero], lista_pacientes:list[cPaciente], fila_urgencia: PriorityQueuePaciente, fila_no_urgencia: PriorityQueuePaciente)->None:
   cont=0
   for i in range (0,len(lista_pacientes),len(lista_enfermeros)): #recorro la lista de pacientes (con paso cantidad de enfermeros activos, ya que por cada iteracion van a atender un paciente cada uno)
     cont=cont+1
@@ -89,9 +89,9 @@ def trabajo_enfermeros(lista_enfermeros:list[cEnfermero], lista_pacientes:list[c
       if lista_pacientes[i+j].diagnostico.color=="rojo":
         cConsultorio.atender_urgencia(lista_pacientes[i+j])
       elif lista_pacientes[i+j].diagnostico.color in ["naranja","amarillo"]:
-        fila_urgencia.put(lista_pacientes[i+j].diagnostico.prioridad,lista_pacientes[i+j])
+        fila_urgencia.push(lista_pacientes[i+j],lista_pacientes[i+j].diagnostico.prioridad)
       else:
-        fila_no_urgencia.put(lista_pacientes[i+j].diagnostico.prioridad, lista_pacientes[i+j])
+        fila_no_urgencia.push(lista_pacientes[i+j], lista_pacientes[i+j].diagnostico.prioridad)
     if cont%3 == 0:#cada 3 iteraciones actualizo la prioridad de los pacientes en caso de que su tiempo de espera haya disminuido y "cambie de categoria"
       lista_enfermeros[0].chequear(fila_no_urgencia,fila_urgencia)
 

@@ -1,11 +1,9 @@
-import queue
-
 import pytest
 from library.classConsultorio import cConsultorio
 from library.classPaciente import cPaciente
 from library.classEnfermedad import cEnfermedad
 from library.classEnfermero import cEnfermero
-from queue import PriorityQueue
+from library.classPriorityQueuePaciente import PriorityQueuePaciente
 
 def test_curar():
     enfermedad_aux=cEnfermedad("indefinido",0,"indefinido",0,0)
@@ -48,14 +46,28 @@ def test_atender_DC():
     assert paciente3.estado == "sano"
     assert paciente4.estado == "sano"
 
-#def test_atender_G():
-    #consultorio = cConsultorio( False)
-    #enfermero = cEnfermero(3, "Emi")
-    #paciente1 = cPaciente(6, "Agos", "esguince", "embarazo", "")  # los sintomas no me importan
-    #paciente2 = cPaciente(7, "Pau", "politraumatismo_grave", "ninguno","riesgo_vital")  # en teoria no deberia llegar a estar pero como le pusimos una prioridad muy alta lo deberia atender
-    #paciente3 = cPaciente(8, "Lupe", "isquemia", "obesidad", "")
-    #paciente4 = cPaciente(9, "Valen", "no_urgencia", "mayor_edad", "")
+def test_atender_G():
+    consultorio = cConsultorio( False)
 
-    #filaA = PriorityQueue()
-    #riesgo3=enfermero.convert_fr(paciente3.factor_riesgo)
-    #filaA.put((paciente3.diagnostico.prioridad+riesgo3,paciente3))
+    enfermedad1=cEnfermedad("verde",45,"esguince",5,cEnfermero.tmax_verde)
+    enfermedad3=cEnfermedad("naranja",20,"isquemia",10,cEnfermero.tmax_naraja)
+    enfermedad4=cEnfermedad("azul",5,"no_urgencia",2,cEnfermero.tmax_azul)
+
+    lista_sintomas: list[str] = []
+
+    paciente1 = cPaciente(6, "Agos", enfermedad1, "embarazo", lista_sintomas)  # los sintomas no me importan
+    paciente3 = cPaciente(8, "Lupe", enfermedad3, "obesidad", lista_sintomas)
+    paciente4 = cPaciente(9, "Valen", enfermedad4, "mayor_edad", lista_sintomas)
+
+    filaA=PriorityQueuePaciente()
+    filaA.push(paciente3,paciente3.diagnostico.prioridad)
+    filaB=PriorityQueuePaciente()
+    filaB.push(paciente1,paciente1.diagnostico.prioridad)
+    filaB.push(paciente4,paciente4.diagnostico.prioridad)
+
+    consultorio.atender_G(filaA,filaB,0)
+
+    assert filaA.is_empty()==True
+    assert filaB.is_empty()==True
+
+

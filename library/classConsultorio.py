@@ -1,6 +1,8 @@
 import time
 from library.classPaciente import cPaciente
 from library.classEnfermero import cEnfermero
+from library.classEnfermedad import cEnfermedad
+from library.classPriorityQueuePaciente import PriorityQueuePaciente
 class cConsultorio:
 
     def __init__(self,ocupado = False):
@@ -25,8 +27,8 @@ class cConsultorio:
         self.ocupado = False #desocupo el consultorio
         cConsultorio.atender_DC(self, lista, enfermero) #sigo atendiendo la lista
 
-    def atender_G(self, filaA, filaB, contador:int )->None:
-        if len(filaA)==0 and len(filaB)==0: #caso base: no hay elementos en las filas
+    def atender_G(self, filaA:PriorityQueuePaciente, filaB:PriorityQueuePaciente, contador:int )->None:
+        if filaA.is_empty() and filaB.is_empty(): #caso base: no hay elementos en las filas
             #lanzar excepcion "filas vacias"
             return
         if contador%5==0: #para respetar proporcion 5:1, si es multiplo de 5 atiendo a la fila B
@@ -35,17 +37,16 @@ class cConsultorio:
         else: #sino, atiendo a la fila A
             fila=filaA
             suma=5-(contador%5)
-        if len(fila)==0: #si la lista en la q estoy parada esta vacia, sigo con la otra
+        if fila.is_empty(): #si la lista en la q estoy parada esta vacia, sigo con la otra
             contador=contador+suma
             cConsultorio.atender_G(self,filaA,filaB, contador)
-
-        paciente=fila[0] #paciente q voy a atender es el primero en la priority queue
-        fila.dequeue() #lo saco de la fila
-        self.ocupado=True #atiendo
-        cConsultorio.curar(self,paciente)
-        time.sleep(paciente.diagnostico.duracion)
-        self.ocupado=False
-        cConsultorio.atender_G(self,filaA,filaB, contador+1) #sigo con el proximo
+        else:
+            paciente=fila.pop() #paciente q voy a atender es el primero en la priority queue y lo saco de la fila
+            self.ocupado=True #atiendo
+            cConsultorio.curar(self,paciente)
+            time.sleep(paciente.diagnostico.duracion/100)
+            self.ocupado=False
+            cConsultorio.atender_G(self,filaA,filaB, contador+1) #sigo con el proximo
 
 
 

@@ -2,6 +2,7 @@ from library.classPaciente import cPaciente
 from library.classEnfermedad import cEnfermedad
 from library.classNodos import Nodo
 from library.bt_sintomas import arbol_sintomas
+from library.classPriorityQueuePaciente import PriorityQueuePaciente
 
 class cEnfermero:
 
@@ -190,20 +191,33 @@ class cEnfermero:
 
         return valor
 
-    def chequear(self, filaA: PriorityQueue, filaB: PriorityQueue)-> None:
-        for i in range (len(filaA)):
-            valor_fr=cEnfermero.convert_fr(filaA[i].factor_riesgo)
-            if filaA[i].diagnostico.tiempo_restante<=2:
-                cConsultorio.atender_urgencia(filaA[i])
-            elif filaA[i].diagnostico.tiempo_restante<=10: #si el tiempo restante es menor al tiempo maximo de espera naranja, cambiamos la prioridad a la minima del grupo naranja + factor de riesgo
-                filaA[i].diagnostico.prioridad= 10 + valor_fr
+    def chequear(self, filaA: PriorityQueuePaciente, filaB: PriorityQueuePaciente)-> None:
+        lista_aux:list[cPaciente]=[]
+        tam_A=filaA.__sizeof__()
+        tam_B=filaB.__sizeof__()
 
-        for i in range (len(filaB)):
-            valor_fr = cEnfermero.convert_fr(filaB[i].factor_riesgo)
-            if filaB[i].diagnostico.tiempo_restante<=60: #mismo para amarillo
-                filaB[i].diagnostico.prioridad = 6 + valor_fr
-            elif filaB[i].diagnostico.tiempo_restante<=120: #mismo para verde
-                filaB[i].diagnostico.prioridad = 3 + valor_fr
+        i=0
+        while not filaA.is_empty():
+            lista_aux[i]=filaA.pop()
+            valor_fr=cEnfermero.convert_fr(lista_aux[i].factor_riesgo)
+            if lista_aux[i].diagnostico.tiempo_restante<=2:
+                lista_aux[i].diagnostico.prioridad=100 #asignamos prioridad de rojo para que se lo atienda urgentemente
+            elif lista_aux[i].diagnostico.tiempo_restante<=10: #si el tiempo restante es menor al tiempo maximo de espera naranja, cambiamos la prioridad a la minima del grupo naranja + factor de riesgo
+                lista_aux[i].diagnostico.prioridad= 10 + valor_fr
+            i=i+1
+        for x in range (tam_A):
+            filaA.push(lista_aux[x],lista_aux[x].diagnostico.prioridad)
 
+        i = 0
+        while not filaB.is_empty():
+            lista_aux[i]=filaB.pop()
+            valor_fr = cEnfermero.convert_fr(lista_aux[i].factor_riesgo)
+            if lista_aux[i].diagnostico.tiempo_restante<=60: #mismo para amarillo
+                lista_aux[i].diagnostico.prioridad = 6 + valor_fr
+            elif lista_aux[i].diagnostico.tiempo_restante<=120: #mismo para verde
+                lista_aux[i].diagnostico.prioridad = 3 + valor_fr
+            i=i+1
+        for x in range (tam_B):
+            filaB.push(lista_aux[x],lista_aux[x].diagnostico.prioridad)
 
 
