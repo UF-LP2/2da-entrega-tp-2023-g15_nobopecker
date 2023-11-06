@@ -1,13 +1,11 @@
 import time
 from library.classPaciente import cPaciente
 from library.classEnfermero import cEnfermero
-from library.classEnfermedad import cEnfermedad
 from library.classPriorityQueuePaciente import PriorityQueuePaciente
 class cConsultorio:
 
-    def __init__(self,ocupado = False):
-        self.ocupado=ocupado
-
+    def __init__(self, ocupado = False):
+        self.consultorio=ocupado
 
     def curar(self, paciente:cPaciente) -> None: #metodo de curar paciente
         paciente.estado= "sano"
@@ -29,7 +27,6 @@ class cConsultorio:
 
     def atender_G(self, filaA:PriorityQueuePaciente, filaB:PriorityQueuePaciente, contador:int )->None:
         if filaA.is_empty() and filaB.is_empty(): #caso base: no hay elementos en las filas
-            #lanzar excepcion "filas vacias"
             return
         if contador%5==0: #para respetar proporcion 5:1, si es multiplo de 5 atiendo a la fila B
             fila=filaB

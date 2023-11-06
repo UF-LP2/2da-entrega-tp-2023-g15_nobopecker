@@ -17,41 +17,64 @@ def main():
   #leemos los archivos
   lista_pacientes:list[cPaciente]=leerPaciente()
   lista_enfermeros:list[cEnfermero]=leerEnfermero()
+
   #inicializamos un consultorio
   consultorio=cConsultorio()
+
   #nos creamos un hospital
-  hospital_NoboPecker=cHospital(consultorio,lista_pacientes,lista_enfermeros) #no hice mucho pero lo tengo
-  #funciones que van a correr al mismo tiempo
-  reloj=threading.Thread(target=horario()) #para achicar la escala de tiempo (1hora=1min, 1min=1seg)
-  lista_ingresados:list[cPaciente]=[]
-  ingreso_pac=threading.Thread(target=ingresar_pacientes(lista_pacientes,lista_ingresados))
+  hospital_NoboPecker=cHospital(consultorio,lista_pacientes,lista_enfermeros)
+
+  #funcion que simula el paso del tiempo
+  reloj=threading.Thread(target=horario) #para achicar la escala de tiempo (1hora=1min, 1min=1seg)
+
+  #auxiliares
   lista_enfermeros_activos:list[cEnfermero]=[]
   fila_urgencia=PriorityQueuePaciente()
   fila_no_urgencia=PriorityQueuePaciente()
   fin_del_dia:datetime=hora_actual+timedelta(hours=5)#para que termine el programa
 
+  #empiezan a correr el reloj
   reloj.start()
+
+  primera_vez:bool=True
+  cambio_de_turno:bool=False
+  turno_actual=""
+
   while hora_actual<=fin_del_dia:
+
     #segun el horario varia la cantidad de enfermeros activos
     if hora_actual.hour in range(6,9):
+      if turno_actual=="nocturno":
+        cambio_de_turno=True
+      turno_actual="mañana"
       lista_enfermeros_activos=[lista_enfermeros[0],lista_enfermeros[1]]
 
     elif hora_actual.hour in range(10,15):
+      if turno_actual=="mañana":
+        cambio_de_turno=True
+      turno_actual="hora_pico"
       lista_enfermeros_activos=[lista_enfermeros[2],lista_enfermeros[3],lista_enfermeros[4],lista_enfermeros[5],lista_enfermeros[6]]
 
     elif hora_actual.hour in range(16,22):
+      if turno_actual=="hora_pico":
+        cambio_de_turno=True
+      turno_actual="tarde"
       lista_enfermeros_activos=[lista_enfermeros[7],lista_enfermeros[8],lista_enfermeros[9]]
 
     else:
+      if turno_actual=="tarde":
+        cambio_de_turno=True
+      turno_actual="nocturno"
       lista_enfermeros_activos = [lista_enfermeros[10]]
 
-    trabajo_enf = threading.Thread(target=trabajo_enfermeros(lista_enfermeros_activos, lista_ingresados, fila_urgencia, fila_no_urgencia))
-    trabajo_enf.start()
-    ingreso_pac.start()
+    if primera_vez or cambio_de_turno:
+      trabajo_enf = threading.Thread(target=trabajo_enfermeros, args=(lista_enfermeros_activos, lista_pacientes, fila_urgencia, fila_no_urgencia,consultorio))
+      trabajo_enf.start()
+      cambio_de_turno=False
+      primera_vez=False
 
 
   trabajo_enf.join()
-  ingreso_pac.join()
   reloj.join()
 
 def horario()->None:
@@ -67,33 +90,38 @@ def tiempo_restante(lista_pac:list[cPaciente])->None: #voy bajando el tiempo res
       lista_pac[i].diagnostico.tiempo_restante=lista_pac[i].diagnostico.tiempo_restante - 1
     time.sleep(1)
 
-def ingresar_pacientes(lista_pacientes_total:list[cPaciente],lista_ingresados:list[cPaciente])->None:
+def ingresar_pacientes(lista_pacientes_total:list[cPaciente])->list[cPaciente]:
+  lista_ingresados: list[cPaciente]=[]
   #hay un 80% de probabilidad de que entren pacientes nuevos (cada 4 segundos o 6 si no ingresaron)
   probabilidad=int(random()*10)
   #entra una cantidad random de pacientes
-  cantidad=int(random()*5 + 1)
+  cantidad=int(random()*10 + 1)
   if probabilidad in range (0,8):
     for i in range (cantidad):
-      num_pac=int(random()*(30-cantidad))
+      num_pac=int(random()*(63-cantidad))
       lista_ingresados.append(lista_pacientes_total[num_pac+i])
       time.sleep(4)
   else:
     time.sleep(6)
+  return lista_ingresados
 
-def trabajo_enfermeros(lista_enfermeros:list[cEnfermero], lista_pacientes:list[cPaciente], fila_urgencia: PriorityQueuePaciente, fila_no_urgencia: PriorityQueuePaciente)->None:
+def trabajo_enfermeros(lista_enfermeros:list[cEnfermero], lista_pacientes:list[cPaciente], fila_urgencia: PriorityQueuePaciente, fila_no_urgencia: PriorityQueuePaciente, consultorio: cConsultorio)->None:
+  lista_ingresados=ingresar_pacientes(lista_pacientes)
   cont=0
-  for i in range (0,len(lista_pacientes),len(lista_enfermeros)): #recorro la lista de pacientes (con paso cantidad de enfermeros activos, ya que por cada iteracion van a atender un paciente cada uno)
+  for i in range (0,len(lista_ingresados),len(lista_enfermeros)): #recorro la lista de pacientes (con paso cantidad de enfermeros activos, ya que por cada iteracion van a atender un paciente cada uno)
     cont=cont+1
     for j in range(len(lista_enfermeros)):
-      lista_pacientes[i+j].diagnostico=lista_enfermeros[j].diagnosticar(lista_pacientes[i+j])
-      if lista_pacientes[i+j].diagnostico.color=="rojo":
-        cConsultorio.atender_urgencia(lista_pacientes[i+j])
-      elif lista_pacientes[i+j].diagnostico.color in ["naranja","amarillo"]:
-        fila_urgencia.push(lista_pacientes[i+j],lista_pacientes[i+j].diagnostico.prioridad)
+      lista_ingresados[i+j].diagnostico=lista_enfermeros[j].diagnosticar(lista_ingresados[i+j])
+      if lista_ingresados[i+j].diagnostico.color=="rojo":
+        cConsultorio.atender_urgencia(lista_ingresados[i+j])
+      elif lista_ingresados[i+j].diagnostico.color in ["naranja","amarillo"]:
+        fila_urgencia.push(lista_ingresados[i+j],lista_ingresados[i+j].diagnostico.prioridad)
       else:
-        fila_no_urgencia.push(lista_pacientes[i+j], lista_pacientes[i+j].diagnostico.prioridad)
+        fila_no_urgencia.push(lista_ingresados[i+j], lista_ingresados[i+j].diagnostico.prioridad)
     if cont%3 == 0:#cada 3 iteraciones actualizo la prioridad de los pacientes en caso de que su tiempo de espera haya disminuido y "cambie de categoria"
       lista_enfermeros[0].chequear(fila_no_urgencia,fila_urgencia)
+      lista_ingresados=lista_ingresados+ingresar_pacientes(lista_pacientes)
+      consultorio.atender_G(fila_urgencia, fila_no_urgencia,0)
 
 
 
