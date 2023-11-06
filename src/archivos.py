@@ -15,7 +15,7 @@ def leerPaciente() -> list[cPaciente]:
             pacientes.append(paciente_aux)
     return pacientes
 
-def leerEnfermero() -> list[cEnfermero]: #para mi es al pedo, el ID lo puedo generar con un random y listo, no tienen por q ser los mismos q ayer
+def leerEnfermero() -> list[cEnfermero]:
     enfermeros:list[cEnfermero]=[]
     with open("ENFERMEROS.csv") as file:
         reader=csv.reader(file)
