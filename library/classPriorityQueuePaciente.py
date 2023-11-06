@@ -7,7 +7,7 @@ class PriorityQueuePaciente:
     def is_empty(self):
         return len(self.elements) == 0
 
-    def push(self, item:cPaciente, priority):
+    def push(self, priority, item:cPaciente):
         heapq.heappush(self.elements, (-priority, item))
 
     def pop(self):
