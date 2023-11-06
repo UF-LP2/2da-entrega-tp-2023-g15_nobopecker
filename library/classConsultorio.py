@@ -9,6 +9,8 @@ class cConsultorio:
 
     def curar(self, paciente:cPaciente) -> None: #metodo de curar paciente
         paciente.estado= "sano"
+        print("Paciente: ",paciente.nombre_apellido," de color ",paciente.diagnostico.color," curado <3  ")
+
 
     @staticmethod
     def atender_urgencia (paciente: cPaciente) ->None: #metodo de curar paciente static para atender urgencias sin importar consultorios libres
