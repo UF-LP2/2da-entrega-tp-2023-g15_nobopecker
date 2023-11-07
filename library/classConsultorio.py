@@ -8,15 +8,23 @@ class cConsultorio:
         self.consultorio=ocupado
 
     def curar(self, paciente:cPaciente) -> None: #metodo de curar paciente
-        paciente.estado= "sano"
-        print("Paciente: ",paciente.nombre_apellido," de color ",paciente.diagnostico.color," curado <3  ")
+        if  paciente.diagnostico.tiempo_restante > 0:
+            paciente.estado = "sano"
+            print("Paciente: ", paciente.nombre_apellido, " de color ", paciente.diagnostico.color, " curado :)")
+        else:# se canso y se fue
+            paciente.estado = "enfermo"
+            print("El paciente: ", paciente.nombre_apellido, " ha abandonado la sala de espera :|")
         return
 
 
     @staticmethod
     def atender_urgencia (paciente: cPaciente) ->None: #metodo de curar paciente static para atender urgencias sin importar consultorios libres
-        paciente.estado= "sano"
-        print("Paciente: ", paciente.nombre_apellido, " de color ", paciente.diagnostico.color, " curado <3  ")
+        if paciente.diagnostico.tiempo_restante>0:
+           paciente.estado= "sano"
+           print("Paciente: ", paciente.nombre_apellido, " de color ", paciente.diagnostico.color, " curado :)")
+        else:#fallecio
+            paciente.estado="muerto"
+            print("El paciente: ", paciente.nombre_apellido," ha fallecido :(")
         return
 
     def atender_DC(self, lista:list[cPaciente], enfermero: cEnfermero)->None:
