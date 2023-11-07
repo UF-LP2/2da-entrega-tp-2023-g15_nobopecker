@@ -2,6 +2,7 @@ from library.classEnfermero import cEnfermero
 from library.bt_sintomas import arbol_sintomas
 from library.classEnfermedad import cEnfermedad
 from library.classPaciente import cPaciente
+import pytest
 
 def test_comprarsintomas1():
     enfermero=cEnfermero(1,"Pepe")

@@ -1,5 +1,6 @@
 from library.classEnfermedad import cEnfermedad
 from library.classPaciente import cPaciente
+import pytest
 
 def test_comparar_prioridad():
     sintomas:list[str]=[]
