@@ -98,26 +98,23 @@ def ingresar_pacientes(lista_pacientes_total:list[cPaciente])->list[cPaciente]:
   cantidad=int(random()*10 + 1)
   if probabilidad in range (0,8):
     for i in range (cantidad):
-      num_pac=int(random()*(63-cantidad))
+      num_pac=int(random()*(64-cantidad))
       lista_ingresados.append(lista_pacientes_total[num_pac+i])
-      time.sleep(4)
-  else:
-    time.sleep(6)
   return lista_ingresados
 
 def trabajo_enfermeros(lista_enfermeros:list[cEnfermero], lista_pacientes:list[cPaciente], fila_urgencia: PriorityQueuePaciente, fila_no_urgencia: PriorityQueuePaciente, consultorio: cConsultorio)->None:
   lista_ingresados=ingresar_pacientes(lista_pacientes)
   cont=0
-  for i in range (0,len(lista_ingresados),len(lista_enfermeros)): #recorro la lista de pacientes (con paso cantidad de enfermeros activos, ya que por cada iteracion van a atender un paciente cada uno)
+  for i in range (0,len(lista_ingresados)-len(lista_enfermeros),len(lista_enfermeros)): #recorro la lista de pacientes (con paso cantidad de enfermeros activos, ya que por cada iteracion van a atender un paciente cada uno)
     cont=cont+1
     for j in range(len(lista_enfermeros)):
       lista_ingresados[i+j].diagnostico=lista_enfermeros[j].diagnosticar(lista_ingresados[i+j])
       if lista_ingresados[i+j].diagnostico.color=="rojo":
         cConsultorio.atender_urgencia(lista_ingresados[i+j])
       elif lista_ingresados[i+j].diagnostico.color in ["naranja","amarillo"]:
-        fila_urgencia.push(lista_ingresados[i+j],lista_ingresados[i+j].diagnostico.prioridad)
+        fila_urgencia.push(lista_ingresados[i+j].diagnostico.prioridad,lista_ingresados[i+j])
       else:
-        fila_no_urgencia.push(lista_ingresados[i+j], lista_ingresados[i+j].diagnostico.prioridad)
+        fila_no_urgencia.push(lista_ingresados[i+j].diagnostico.prioridad,lista_ingresados[i+j])
     if cont%3 == 0:#cada 3 iteraciones actualizo la prioridad de los pacientes en caso de que su tiempo de espera haya disminuido y "cambie de categoria"
       lista_enfermeros[0].chequear(fila_no_urgencia,fila_urgencia)
       lista_ingresados=lista_ingresados+ingresar_pacientes(lista_pacientes)

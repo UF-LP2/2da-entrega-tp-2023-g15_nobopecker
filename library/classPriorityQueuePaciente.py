@@ -1,4 +1,5 @@
 import heapq
+from library.classPaciente import cPaciente
 class PriorityQueuePaciente:
     def __init__(self):
         self.elements = []
@@ -6,7 +7,7 @@ class PriorityQueuePaciente:
     def is_empty(self):
         return len(self.elements) == 0
 
-    def push(self, item, priority):
+    def push(self, priority, item:cPaciente):
         heapq.heappush(self.elements, (-priority, item))
 
     def pop(self):
