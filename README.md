@@ -13,10 +13,13 @@
 - Pecker Fasce, Paula
 
 ## Objetivo del proyecto
-
-
+La problematica del trabajo es una simulación para un sistema de atención en Triage de un Hospital, el objetivo principal es atender a todos los pacientes que ingresan minimizando el riesgo y evitando que se exceda el tiempo máximo de espera. De esta manera se logrará atender a todos los pacientes sin que la sala de espera se torne ociosa.
 ## Requisitos
-"Explicación de requisitos, librerias y explicaciones de uso"
+Librerías utilizadas:
+  BinaryTree: se generó un árbol de decisión para el diagnostico de los pacientes
+  Pytest: se llevaron a cabo tests de los métodos de cada clase para corroborar su funcionammiento adecuado
+  PriorityQueue: se usan dos colas de prioridad para almacenar los pacientes en espera divididos según gravedad
+  Exceptiongroup: para las excepciones generadas en casos particulares a lo largo del programa 
 
 ---
 ##### UF-FICEN LP2 2023 - GNU General Public License v3.0
