@@ -19,7 +19,7 @@ class cConsultorio:
 
     @staticmethod
     def atender_urgencia (paciente: cPaciente) ->None: #metodo de curar paciente static para atender urgencias sin importar consultorios libres
-        if paciente.diagnostico.tiempo_restante>0:
+        if paciente.diagnostico.tiempo_restante>-5:
            paciente.estado= "sano"
            print("Paciente: ", paciente.nombre_apellido, " de color ", paciente.diagnostico.color, " curado :)")
         else:#fallecio
