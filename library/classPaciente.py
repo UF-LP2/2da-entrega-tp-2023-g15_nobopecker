@@ -12,5 +12,5 @@ class cPaciente:
     def __lt__(self,other):
         riesgo_propio=cEnfermedad.convert_fr(self.factor_riesgo)
         riesgo_otro=cEnfermedad.convert_fr(other.factor_riesgo)
-        return True if (self.diagnostico.prioridad+riesgo_propio)>(other.diagnostico.prioridad +riesgo_otro) else False
+        return True if (self.diagnostico.prioridad+riesgo_propio)<(other.diagnostico.prioridad +riesgo_otro) else False
 

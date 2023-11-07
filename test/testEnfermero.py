@@ -82,8 +82,3 @@ def test_elegirpacienteoptimo():
     assert optimo == enfermero.elegir_paciente_optimo(listita)
 
 
-def test_convertfr():
-    assert cEnfermero.embarazo == cEnfermero.convert_fr("embarazo")
-    assert cEnfermero.diabetes == cEnfermero.convert_fr("diabetes")
-    assert cEnfermero.obesidad == cEnfermero.convert_fr("obesidad")
-
