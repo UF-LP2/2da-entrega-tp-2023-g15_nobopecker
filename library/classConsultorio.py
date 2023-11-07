@@ -26,7 +26,7 @@ class cConsultorio:
         lista.remove(paciente) #lo saco de la lista
         self.ocupado=True #el consultorio esta ocupado hasta que termino de atenderlo
         cConsultorio.curar(self, paciente)
-        time.sleep(paciente.diagnostico.duracion) #detengo el programa la duracion de la consulta
+        time.sleep(paciente.diagnostico.duracion/100) #detengo el programa la duracion de la consulta
         self.ocupado = False #desocupo el consultorio
         cConsultorio.atender_DC(self, lista, enfermero) #sigo atendiendo la lista
 
