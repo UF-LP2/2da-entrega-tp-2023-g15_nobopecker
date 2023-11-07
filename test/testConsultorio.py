@@ -60,10 +60,10 @@ def test_atender_G():
     paciente4 = cPaciente(9, "Valen", enfermedad4, "mayor_edad", lista_sintomas)
 
     filaA=PriorityQueuePaciente()
-    filaA.push(paciente3,paciente3.diagnostico.prioridad)
+    filaA.push(paciente3.diagnostico.prioridad,paciente3)
     filaB=PriorityQueuePaciente()
-    filaB.push(paciente1,paciente1.diagnostico.prioridad)
-    filaB.push(paciente4,paciente4.diagnostico.prioridad)
+    filaB.push(paciente1.diagnostico.prioridad,paciente1)
+    filaB.push(paciente4.diagnostico.prioridad,paciente4)
 
     consultorio.atender_G(filaA,filaB,0)
 

@@ -10,11 +10,14 @@ class cConsultorio:
     def curar(self, paciente:cPaciente) -> None: #metodo de curar paciente
         paciente.estado= "sano"
         print("Paciente: ",paciente.nombre_apellido," de color ",paciente.diagnostico.color," curado <3  ")
+        return
 
 
     @staticmethod
     def atender_urgencia (paciente: cPaciente) ->None: #metodo de curar paciente static para atender urgencias sin importar consultorios libres
         paciente.estado= "sano"
+        print("Paciente: ", paciente.nombre_apellido, " de color ", paciente.diagnostico.color, " curado <3  ")
+        return
 
     def atender_DC(self, lista:list[cPaciente], enfermero: cEnfermero)->None:
         if len(lista)==0: #caso base: no hay mas elementos en la lista
