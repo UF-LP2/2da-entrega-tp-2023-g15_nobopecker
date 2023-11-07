@@ -13,14 +13,7 @@ class cEnfermero:
     tmax_amarillo=60
     tmax_verde=120
     tmax_azul=240
-    #factor de riesgo
-    ninguno = 0
-    diabetes = 1
-    obesidad=2
-    mayor_edad = 3
-    enf_respiratoria = 4
-    enf_cardiovascular = 5
-    embarazo=6
+
 
     def __init__(self,ID, nombre_apellido:str):
         self.ID=ID
@@ -171,25 +164,7 @@ class cEnfermero:
             nueva_lista:list[cPaciente]=[optimo_primera_mitad,optimo_seguda_mitad]
             return cEnfermero.elegir_paciente_optimo(self, nueva_lista)
 
-    @staticmethod
-    def convert_fr(factor_riesgo:str) -> int:
-        valor:int=0
-        if factor_riesgo=="embarazo":
-            valor=cEnfermero.embarazo
-        elif factor_riesgo=="enf_cardiovascular":
-            valor=cEnfermero.enf_cardiovascular
-        elif factor_riesgo=="enf_respiratoria":
-            valor=cEnfermero.enf_respiratoria
-        elif factor_riesgo=="mayor_edad":
-            valor=cEnfermero.mayor_edad
-        elif factor_riesgo=="obesidad":
-            valor=cEnfermero.obesidad
-        elif factor_riesgo=="diabetes":
-            valor=cEnfermero.diabetes
-        elif factor_riesgo=="ninguno":
-            valor=cEnfermero.ninguno
 
-        return valor
 
     def chequear(self, filaA: PriorityQueuePaciente, filaB: PriorityQueuePaciente)-> None:
         lista_aux:list[cPaciente]=[]
@@ -206,7 +181,7 @@ class cEnfermero:
                 lista_aux[i].diagnostico.prioridad= 10 + valor_fr
             i=i+1
         for x in range (tam_A):
-            filaA.push(lista_aux[x],lista_aux[x].diagnostico.prioridad)
+            filaA.push(lista_aux[x].diagnostico.prioridad,lista_aux[x])
 
         i = 0
         while not filaB.is_empty():
@@ -218,6 +193,6 @@ class cEnfermero:
                 lista_aux[i].diagnostico.prioridad = 3 + valor_fr
             i=i+1
         for x in range (tam_B):
-            filaB.push(lista_aux[x],lista_aux[x].diagnostico.prioridad)
+            filaB.push(lista_aux[x].diagnostico.prioridad,lista_aux[x])
 
 
