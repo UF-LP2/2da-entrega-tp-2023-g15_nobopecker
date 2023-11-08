@@ -41,22 +41,28 @@ class cConsultorio:
     def atender_G(self, filaA:PriorityQueuePaciente, filaB:PriorityQueuePaciente, contador:int )->None:
         if filaA.is_empty() and filaB.is_empty(): #caso base: no hay elementos en las filas
             return
-        if contador%5==0: #para respetar proporcion 5:1, si es multiplo de 5 atiendo a la fila B
-            fila=filaB
-            suma=1
+        if contador%6==0: #para respetar proporcion 5:1, si es multiplo de 6 atiendo a la fila B
+
+            if not filaB.is_empty():  # si la lista en la q estoy parada esta vacia, sigo con la otra
+                paciente = filaB.pop()  # paciente q voy a atender es el primero en la priority queue y lo saco de la fila
+                self.ocupado = True  # atiendo
+                time.sleep(paciente.diagnostico.duracion / 100)
+                cConsultorio.curar(self, paciente)
+                self.ocupado = False
+
+            cConsultorio.atender_G(self,filaA,filaB,contador+1)# sigo con el proximo
         else: #sino, atiendo a la fila A
-            fila=filaA
             suma=5-(contador%5)
-        if fila.is_empty(): #si la lista en la q estoy parada esta vacia, sigo con la otra
-            contador=contador+suma
-            cConsultorio.atender_G(self,filaA,filaB, contador)
-        else:
-            paciente=fila.pop() #paciente q voy a atender es el primero en la priority queue y lo saco de la fila
-            self.ocupado=True #atiendo
-            cConsultorio.curar(self,paciente)
-            time.sleep(paciente.diagnostico.duracion/100)
-            self.ocupado=False
-            cConsultorio.atender_G(self,filaA,filaB, contador+1) #sigo con el proximo
+            if filaA.is_empty(): #si la lista en la q estoy parada esta vacia, sigo con la otra
+                contador=contador+suma
+                cConsultorio.atender_G(self,filaA,filaB, contador)
+            else:
+                paciente=filaA.pop() #paciente q voy a atender es el primero en la priority queue y lo saco de la fila
+                self.ocupado=True #atiendo
+                time.sleep(paciente.diagnostico.duracion/100)
+                cConsultorio.curar(self, paciente)
+                self.ocupado=False
+                cConsultorio.atender_G(self,filaA,filaB, contador+1) #sigo con el proximo
 
 
 

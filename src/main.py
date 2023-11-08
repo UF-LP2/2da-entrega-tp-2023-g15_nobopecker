@@ -91,14 +91,21 @@ def tiempo_restante(lista_pac:list[cPaciente])->None: #voy bajando el tiempo res
   time.sleep(1)
 
 def ingresar_pacientes(lista_pacientes_total:list[cPaciente])->list[cPaciente]:
+
   lista_ingresados: list[cPaciente]=[]
   #hay un 80% de probabilidad de que entren pacientes nuevos (cada 4 segundos o 6 si no ingresaron)
   probabilidad=int(random()*10)
   #entra una cantidad random de pacientes
   cantidad=int(random()*5 + 5)
   if probabilidad in range (0,8):
+    if cEnfermero.ultimo_paciente_ingresado+cantidad<64:
+      num_pac=cEnfermero.ultimo_paciente_ingresado+1
+      cEnfermero.ultimo_paciente_ingresado=num_pac+cantidad
+    else:
+      num_pac=0
+      cEnfermero.ultimo_paciente_ingresado=cantidad
+
     for i in range (cantidad):
-      num_pac=int(random()*(64-cantidad))
       lista_ingresados.append(lista_pacientes_total[num_pac+i])
   return lista_ingresados
 
@@ -119,8 +126,10 @@ def trabajo_enfermeros(lista_enfermeros:list[cEnfermero], lista_pacientes:list[c
           fila_no_urgencia.push(lista_ingresados[i+j].diagnostico.prioridad,lista_ingresados[i+j])
       if cont%3 == 0:#cada 3 iteraciones actualizo la prioridad de los pacientes en caso de que su tiempo de espera haya disminuido y "cambie de categoria"
         lista_enfermeros[0].chequear(fila_no_urgencia,fila_urgencia)
+        consultorio.atender_G(fila_urgencia, fila_no_urgencia, 1)
+        time.sleep(1) #para dejar pasar al menos 1 minuto para que ingresen mas pacientes
         lista_ingresados=lista_ingresados+ingresar_pacientes(lista_pacientes)
-        consultorio.atender_G(fila_urgencia, fila_no_urgencia,1)
+
 
 
 

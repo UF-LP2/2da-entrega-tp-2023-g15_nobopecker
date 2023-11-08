@@ -1,5 +1,31 @@
 import tkinter as tk
+import time
 import random
+
+class Paciente:
+    def __init__(self, canvas, x, y):
+        self.canvas = canvas
+        self.x = x
+        self.y = y
+        self.color = "gray"
+        self.diagnostico = ""
+        self.fila = None
+        self.cuadrado = self.canvas.create_rectangle(self.x, self.y, self.x + 20, self.y + 20, fill=self.color)
+
+
+    def diagnosticar(self):
+        self.diagnostico = random.choice(["red", "orange", "yellow", "green", "blue"])
+        self.canvas.itemconfig(self.cuadrado, fill=self.diagnostico)
+        if self.diagnostico in ["orange", "yellow"]:
+            self.fila = "urgencia"
+        elif self.diagnostico in ['green', 'blue']:
+            self.fila="no urgencia"
+        else:
+            self.fila="atencion directa"
+
+    def eliminar(self):
+        self.canvas.delete(self.cuadrado)
+
 
 class SistemaDeTriage:
 
@@ -19,25 +45,60 @@ class SistemaDeTriage:
         self.fila_urgencia = []
         self.fila_no_urgencia = []
         self.cont_pacientes = 0
+        self.tiempo = 0
+
+        self.reloj = tk.Label(root, text="", font=("Arial", 14))
+        self.reloj.place(x=600, y=5)
+
+        self.canvas = tk.Canvas(root, width=1000, height=600, bg='white')
+        self.canvas.pack()
 
         # Agrega texto en la parte superior
         self.ingreso_label = tk.Label(root, text="Ingreso de Pacientes", font=("Arial", 14))
-        self.ingreso_label.pack()
 
-        self.canvas = tk.Canvas(root, width=800, height=400, bg='white')
-        self.canvas.pack()
+        # Colocar la etiqueta en la parte superior de la ventana
+        self.ingreso_label.pack(side="top", pady=10)
+
+        # Centrar horizontalmente la etiqueta en la parte superior de la ventana
+        window_width = self.root.winfo_reqwidth()
+        label_width = self.ingreso_label.winfo_reqwidth()
+        x = (window_width - label_width) // 2
+        self.ingreso_label.place(x=x, y=0)
+
+
+        self.pacientes = []
+        self.simular_ingreso_pacientes()
 
         # Agrega texto en la parte inferior
         self.atencion_label = tk.Label(root, text="Atención de Pacientes", font=("Arial", 14))
         self.atencion_label.pack()
 
         self.process_button = tk.Button(root, text="Atender Paciente", command=self.procesar_paciente)
-        self.process_button.pack()
+        self.process_button.pack(pady=10)
         self.generar_paciente()
 
         self.reiniciar_button = tk.Button(root, text="Reiniciar Simulación", command=self.reiniciar_simulacion)
         self.reiniciar_button.pack()
         self.generar_paciente()
+
+        self.actualizar_reloj()
+
+    def simular_ingreso_pacientes(self):
+        x = 10
+        y= 50
+        for _ in range(5):  # Simular 15 pacientes ingresando
+            paciente = Paciente(self.canvas, x, y)
+            self.pacientes.append(paciente)
+            x += 40  # Ajustar la posición para el próximo paciente
+            self.root.update()  # Actualizar la ventana para mostrar el cambio de color
+            time.sleep(1)  # Esperar un segundo y medio antes de diagnosticar al siguiente paciente
+            self.root.update()  # Actualizar la ventana para mostrar el cambio de color
+
+        for paciente in self.pacientes:
+            paciente.diagnosticar()
+            paciente.eliminar()
+
+        self.ingreso_label.config(text="Sala de Espera")
 
     def generar_paciente(self):
         color_paciente = 'gray'
@@ -79,8 +140,16 @@ class SistemaDeTriage:
         else:
             self.canvas.move(paciente_cuadrado, 0, 200)
 
-        # Llama a la función para generar el próximo paciente después de 1000 milisegundos (1 segundos)
-        self.root.after(1000, self.generar_paciente)
+        self.tiempo += 1
+        self.actualizar_reloj()
+
+        # Llama a la función para generar el próximo paciente después de 1500 milisegundos (1,5 segundos)
+        self.root.after(1500, self.generar_paciente)
+
+    def actualizar_reloj(self):
+        # Obtener la hora actual en el formato HH:MM:SS
+        hora_actual = time.strftime("%H:%M:%S")
+        self.reloj.config(text="Hora: {}".format(hora_actual))
 
     def reiniciar_simulacion(self):
 
@@ -106,7 +175,7 @@ class SistemaDeTriage:
         elif self.fila_no_urgencia and SistemaDeTriage.cont%3==0:
             patient = self.fila_no_urgencia.pop(0)
             self.canvas.move(patient, 0, 200)
-        self.generar_paciente()
+        #self.generar_paciente()
         SistemaDeTriage.cont+=1
 
 

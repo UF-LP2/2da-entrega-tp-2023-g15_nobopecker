@@ -13,6 +13,7 @@ class cEnfermero:
     tmax_amarillo=60
     tmax_verde=120
     tmax_azul=240
+    ultimo_paciente_ingresado=-1
 
 
     def __init__(self,ID, nombre_apellido:str):
