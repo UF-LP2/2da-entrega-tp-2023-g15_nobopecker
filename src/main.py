@@ -85,10 +85,10 @@ def horario()->None:
 
 def tiempo_restante(lista_pac:list[cPaciente])->None: #voy bajando el tiempo restante de espera de los pacientes que ya ingresaron
   global hora_actual
-  while True:
-    for i in range (len(lista_pac)):
-      lista_pac[i].diagnostico.tiempo_restante=lista_pac[i].diagnostico.tiempo_restante - 1
-    time.sleep(1)
+  cambio=10 if int(random()*2)==1 else 1 #cada tanto restamos 10 en el tiempo restante para llegar al caso donde el paciente exceda su tiempo maximo de espera
+  for i in range (len(lista_pac)):
+    lista_pac[i].diagnostico.tiempo_restante=lista_pac[i].diagnostico.tiempo_restante - cambio
+  time.sleep(1)
 
 def ingresar_pacientes(lista_pacientes_total:list[cPaciente])->list[cPaciente]:
   lista_ingresados: list[cPaciente]=[]
@@ -106,6 +106,7 @@ def trabajo_enfermeros(lista_enfermeros:list[cEnfermero], lista_pacientes:list[c
   lista_ingresados = ingresar_pacientes(lista_pacientes)
   cont = 0
   while True:
+    tiempo_restante(lista_ingresados)
     for i in range (0,len(lista_ingresados)-len(lista_enfermeros),len(lista_enfermeros)): #recorro la lista de pacientes (con paso cantidad de enfermeros activos, ya que por cada iteracion van a atender un paciente cada uno)
       cont=cont+1
       for j in range(len(lista_enfermeros)):
