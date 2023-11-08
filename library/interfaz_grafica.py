@@ -47,9 +47,6 @@ class SistemaDeTriage:
         self.cont_pacientes = 0
         self.tiempo = 0
 
-        self.reloj = tk.Label(root, text="", font=("Arial", 14))
-        self.reloj.place(x=600, y=5)
-
         self.canvas = tk.Canvas(root, width=1000, height=600, bg='white')
         self.canvas.pack()
 
@@ -69,7 +66,12 @@ class SistemaDeTriage:
         self.pacientes = []
         self.simular_ingreso_pacientes()
 
-        # Agrega texto en la parte inferior
+
+        self.reloj=tk.Label(root, text="", font=("Arial", 14))
+        self.reloj.pack()
+        self.reloj.place(x=800, y=0)
+        self.actualizar_reloj()
+
         self.atencion_label = tk.Label(root, text="Atención de Pacientes", font=("Arial", 14))
         self.atencion_label.pack()
 
@@ -81,7 +83,6 @@ class SistemaDeTriage:
         self.reiniciar_button.pack()
         self.generar_paciente()
 
-        self.actualizar_reloj()
 
     def simular_ingreso_pacientes(self):
         x = 10
