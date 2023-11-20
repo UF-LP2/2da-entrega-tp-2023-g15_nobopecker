@@ -93,7 +93,7 @@ def tiempo_restante(lista_pac:list[cPaciente])->None: #voy bajando el tiempo res
 def ingresar_pacientes(lista_pacientes_total:list[cPaciente])->list[cPaciente]:
 
   lista_ingresados: list[cPaciente]=[]
-  #hay un 80% de probabilidad de que entren pacientes nuevos (cada 4 segundos o 6 si no ingresaron)
+  #hay un 80% de probabilidad de que entren pacientes nuevos
   probabilidad=int(random()*10)
   #entra una cantidad random de pacientes
   cantidad=int(random()*5 + 5)

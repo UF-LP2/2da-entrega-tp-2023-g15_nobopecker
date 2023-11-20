@@ -34,10 +34,10 @@ class SistemaDeTriage:
 
     def __init__(self, root):
 
-        self.ultimo_x_R = 0  # Posición x del último cuadrado agregado
+        self.ultimo_x_R = 0  # posición x del último cuadrado agregado
         self.ultimo_x_NA = 0
         self.ultimo_x_VA = 0
-        self.y = 0  # Posición y segun su color
+        self.y = 0  # posición y segun su color
 
         self.root = root
         self.root.title("Sistema de Triage")
@@ -47,31 +47,31 @@ class SistemaDeTriage:
         self.cont_pacientes = 0
         self.tiempo = 0
 
+        #pantalla en blanco
         self.canvas = tk.Canvas(root, width=1000, height=600, bg='white')
         self.canvas.pack()
 
-        # Agrega texto en la parte superior
+        #texto en la parte de arriba
         self.ingreso_label = tk.Label(root, text="Ingreso de Pacientes", font=("Arial", 14))
-
-        # Colocar la etiqueta en la parte superior de la ventana
         self.ingreso_label.pack(side="top", pady=10)
 
-        # Centrar horizontalmente la etiqueta en la parte superior de la ventana
+        #para centrarlo
         window_width = self.root.winfo_reqwidth()
         label_width = self.ingreso_label.winfo_reqwidth()
         x = (window_width - label_width) // 2
         self.ingreso_label.place(x=x, y=0)
 
-
+        #simulacion de ingreso de pacientes
         self.pacientes = []
         self.simular_ingreso_pacientes()
 
-
+        #reloj
         self.reloj=tk.Label(root, text="", font=("Arial", 14))
         self.reloj.pack()
         self.reloj.place(x=800, y=0)
         self.actualizar_reloj()
 
+        #botones y titulos
         self.atencion_label = tk.Label(root, text="Atención de Pacientes", font=("Arial", 14))
         self.atencion_label.pack()
 
@@ -87,13 +87,13 @@ class SistemaDeTriage:
     def simular_ingreso_pacientes(self):
         x = 10
         y= 50
-        for _ in range(5):  # Simular 15 pacientes ingresando
+        for _ in range(5):  # simular 15 pacientes ingresando
             paciente = Paciente(self.canvas, x, y)
             self.pacientes.append(paciente)
-            x += 40  # Ajustar la posición para el próximo paciente
-            self.root.update()  # Actualizar la ventana para mostrar el cambio de color
-            time.sleep(1)  # Esperar un segundo y medio antes de diagnosticar al siguiente paciente
-            self.root.update()  # Actualizar la ventana para mostrar el cambio de color
+            x += 40
+            self.root.update()
+            time.sleep(1)
+            self.root.update()
 
         for paciente in self.pacientes:
             paciente.diagnosticar()
@@ -132,7 +132,7 @@ class SistemaDeTriage:
             x=self.ultimo_x_VA
 
 
-        # Crea el paciente en la nueva posición
+        # crea el paciente en la nueva posición
         paciente_cuadrado = self.canvas.create_rectangle(x, self.y, x + 20, self.y + 20, fill=color_paciente)
         if prioridad in ['naranja', 'amarillo']:
             self.fila_urgencia.append(paciente_cuadrado)
@@ -144,29 +144,29 @@ class SistemaDeTriage:
         self.tiempo += 1
         self.actualizar_reloj()
 
-        # Llama a la función para generar el próximo paciente después de 1500 milisegundos (1,5 segundos)
+        #llama a la función para generar el próximo paciente después de 1500 milisegundos (1,5 segundos)
         self.root.after(1500, self.generar_paciente)
 
     def actualizar_reloj(self):
-        # Obtener la hora actual en el formato HH:MM:SS
+        #obtener la hora actual en el formato HH:MM:SS
         hora_actual = time.strftime("%H:%M:%S")
         self.reloj.config(text="Hora: {}".format(hora_actual))
 
-    def reiniciar_simulacion(self):
+    def reiniciar_simulacion(self): #de nuevo
 
-        self.ultimo_x_R = 0  # Posición x del último cuadrado agregado
+        self.ultimo_x_R = 0
         self.ultimo_x_NA = 0
         self.ultimo_x_VA = 0
-        self.y = 0  # Posición y segun su color
+        self.y = 0
 
-        # Limpiar listas de pacientes
+        #limpiar listas de pacientes
         self.fila_urgencia = []
         self.fila_no_urgencia = []
 
-        # Borrar todos los elementos del lienzo
+        #borrar todos los elementos de la pantalla
         self.canvas.delete("all")
 
-        # Volver a generar pacientes
+        #volver a generar pacientes
         self.generar_paciente()
 
     def procesar_paciente(self):

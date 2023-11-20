@@ -20,13 +20,13 @@ class cEnfermero:
         self.ID=ID
         self.nombre_apellido=nombre_apellido
 
-    def diagnosticar(self, paciente:cPaciente)->cEnfermedad:
+    def diagnosticar(self, paciente:cPaciente)->cEnfermedad: #metodo de diagnostico
         enfermedad=cEnfermero.definir_enfermedad(self, paciente.sintomas)
         valor_fr=(cEnfermedad.convert_fr(paciente.factor_riesgo))
         paciente.diagnostico.prioridad=enfermedad.prioridad+valor_fr
         return enfermedad
 
-    def definir_enfermedad(self, sintomas:list[str])->cEnfermedad:
+    def definir_enfermedad(self, sintomas:list[str])->cEnfermedad: #segun el diagnostico definimos demas datos de la enfermedad
         nodo_enfermedad= cEnfermero.comparar_sintomas(self, sintomas, arbol_sintomas())
         nombre_enfermedad=nodo_enfermedad.name
         #inicializo una enfermedad cualquiera y despues tapo los datos con lo que me devuelve el arbol
@@ -145,13 +145,13 @@ class cEnfermero:
             aux.duracion = 5
 
         return aux
-    def comparar_sintomas(self, sintomas: list[str], arbol_sintomas)->Nodo:
+    def comparar_sintomas(self, sintomas: list[str], arbol_sintomas)->Nodo: #recorremos el arbol para encontrar el diagnostico del paciente
         if arbol_sintomas.right==None and arbol_sintomas.left==None: #hoja
             return arbol_sintomas
         else:
             return cEnfermero.comparar_sintomas(self, sintomas, arbol_sintomas.left) if arbol_sintomas.name in sintomas else cEnfermero.comparar_sintomas(self, sintomas, arbol_sintomas.right)
 
-    def elegir_paciente_optimo(self, lista:list[cPaciente])-> cPaciente:
+    def elegir_paciente_optimo(self, lista:list[cPaciente])-> cPaciente: #metodo del triage d&c para elegir el proximo paciente en ser atendido
         if len(lista)==1:
             return lista[0]
         elif len(lista)==2:
@@ -167,7 +167,7 @@ class cEnfermero:
 
 
 
-    def chequear(self, filaA: PriorityQueuePaciente, filaB: PriorityQueuePaciente)-> None:
+    def chequear(self, filaA: PriorityQueuePaciente, filaB: PriorityQueuePaciente)-> None: #metodo para chequear los tiempos restantes de los pacientes
         filaA_aux=PriorityQueuePaciente()
         filaB_aux = PriorityQueuePaciente()
 

@@ -1,6 +1,6 @@
 import heapq
 from library.classPaciente import cPaciente
-class PriorityQueuePaciente:
+class PriorityQueuePaciente: #PriorityQueue que almacena pacientes
     def __init__(self):
         self.elements = []
 
