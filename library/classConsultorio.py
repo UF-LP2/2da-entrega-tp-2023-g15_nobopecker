@@ -23,8 +23,9 @@ class cConsultorio:
            paciente.estado= "sano"
            print("Paciente: ", paciente.nombre_apellido, " de color ", paciente.diagnostico.color, " curado :)")
         else:#fallecio
-            paciente.estado="muerto"
+            paciente.estado= "muerto"
             print("El paciente: ", paciente.nombre_apellido," ha fallecido :(")
+            raise Exception("Paciente fallecido")
         return
 
     def atender_DC(self, lista:list[cPaciente], enfermero: cEnfermero)->None:

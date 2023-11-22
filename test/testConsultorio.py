@@ -14,11 +14,18 @@ def test_curar():
     assert paciente_aux.estado=="sano"
 
 def test_atender_urgencia():
-    enfermedad_aux = cEnfermedad("indefinido", 0, "indefinido", 0, 0)
+    enfermedad_aux1 = cEnfermedad("indefinido", 0, "indefinido", 0, 0)
+    enfermedad_aux2 = cEnfermedad("indefinido", 0, "indefinido", 0, -200)
     sintomas_aux=["riesgo_vital"]
-    paciente_aux = cPaciente("0011", "Maria Susana", enfermedad_aux, "ninguno", sintomas_aux, "enfermo")
-    cConsultorio.atender_urgencia(paciente_aux)
-    assert paciente_aux.estado=="sano"
+    paciente_aux1 = cPaciente("0011", "Maria Susana", enfermedad_aux1, "ninguno", sintomas_aux, "enfermo")
+    paciente_aux2 = cPaciente("0011", "Maria Susana", enfermedad_aux2, "ninguno", sintomas_aux, "enfermo")
+    try:
+        cConsultorio.atender_urgencia(paciente_aux1)
+        cConsultorio.atender_urgencia(paciente_aux2)
+    except Exception as e:
+        print(e.args)
+    assert paciente_aux1.estado=="sano"
+    assert paciente_aux2.estado=="muerto"
 
 def test_atender_DC():
     #test 1
